@@ -33,10 +33,10 @@ static PPMImage *readPPM(const char *filename){
      }
 
     //check the image format
-    /* if (buff[0] != 'P' || buff[1] != '6') {
+    if (buff[0] != 'P' || buff[1] != '6') {
          fprintf(stderr, "Invalid image format (must be 'P6')\n");
          exit(1);
-    } */
+    }
 
     //alloc memory form image
     img = (PPMImage *)malloc(sizeof(PPMImage));
@@ -91,6 +91,11 @@ static PPMImage *readPPM(const char *filename){
          exit(1);
     }
 
+     printf("\nR, G, B: %d, %d, %d", img->data[0].red, img->data[0].green, img->data[0].blue);
+     /* for(int i=0;i<img->x*img->y;i++){
+          printf("\nR, G, B: %d, %d, %d", img->data[i].red, img->data[i].green, img->data[i].blue);
+     } */
+
     fclose(fp);
     return img;
 }
@@ -125,16 +130,16 @@ void changeColorPPM(PPMImage *img)
     if(img){
 
          for(i=0;i<img->x*img->y;i++){
-              img->data[i].red=RGB_COMPONENT_COLOR-img->data[i].red;
-              img->data[i].green=RGB_COMPONENT_COLOR-img->data[i].green;
-              img->data[i].blue=RGB_COMPONENT_COLOR-img->data[i].blue;
+              img->data[i].red=255;
+              img->data[i].green=255;
+              img->data[i].blue=255;
          }
     }
 }
 
 int main(){
     PPMImage *image;
-    image = readPPM("lena.ppm");
+    image = readPPM("F16.512.ppm");
     changeColorPPM(image);
     writePPM("lena2.ppm",image);
     getchar();
