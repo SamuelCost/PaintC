@@ -20,12 +20,12 @@ void savePPM(PPMImage *image) {
 
     image->matrizDePixels = (PPMPixel*)malloc(image->x * image->y * sizeof(PPMPixel));
 
-    // constroe o cabeçalho do PPM 
+    // constrói o cabeçalho do PPM 
     fprintf(fn, "%s\n", image->typeEncoding); // type enconding image
     fprintf(fn, "%d %d\n", image->x, image->y); // dimension image
     fprintf(fn, "%d\n", image->maxRGBRange); // max RGB value
 
-    // atribui uma cor padrão a todos os pixel da imagem
+    // atribui uma cor padrão a todos os pixels da imagem
     for (int i = 0; i < image->x * image->y; i++){
         image->matrizDePixels[i].r = 255;
         image->matrizDePixels[i].g = 0;
