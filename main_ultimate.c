@@ -36,6 +36,9 @@ void createPPM(PPMImage *image) {
     }
 
     fclose(fn);
+
+    free(image->matrizDePixels);
+    free(image);
 }
 
 static PPMImage *makeStructPPMImage(int x, int y, int maxRGBRange, char *fileName, char *typeEncoding) {
@@ -52,14 +55,14 @@ void checarPrimitiva(char *primitiva, int xInputed, int yInputed, char *fileName
     int x = 600, y = 400, maxRGBRange = 255;
     char *fileName = "image.ppm", *typeEncoding = "P3";
 
-    if (strcmp(primitiva, "image") == 0) {
+    if (strcmp(primitiva, "image") == 0 && xInputed > 0 && yInputed > 0) {
         x = xInputed;
         y = yInputed;
 
         PPMImage *image = makeStructPPMImage(x, y, maxRGBRange, fileName, typeEncoding);
         createPPM(image);
     } else {
-        if (strcmp(primitiva, "save") == 0) {
+        if (strcmp(primitiva, "save") == 0 && strcmp(fileNameInputed, "") != 0) {
             fileName = fileNameInputed;
     
             PPMImage *image = makeStructPPMImage(x, y, maxRGBRange, fileName, typeEncoding);
@@ -71,8 +74,8 @@ void checarPrimitiva(char *primitiva, int xInputed, int yInputed, char *fileName
 }
 
 int main(){
-    int xInputed, yInputed;
-    char *primitiva, *fileNameInputed;
+    int xInputed = 0, yInputed = 0;
+    char *primitiva = "", *fileNameInputed = "";
     
     primitiva = malloc(sizeof(char));
     fileNameInputed = malloc(sizeof(char));
