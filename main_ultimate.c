@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // struct dos pixels em RGB;
 typedef struct{
@@ -13,7 +14,7 @@ typedef struct {
      PPMPixel *matrizDePixels;
 } PPMImage;
 
-void savePPM(PPMImage *image) {
+void createPPM(PPMImage *image) {
     FILE *fn;
 
     fn = fopen(image->fileName, "w+");
@@ -47,11 +48,36 @@ static PPMImage *makeStructPPMImage(int x, int y, int maxRGBRange, char *fileNam
     return image;
 }
 
+void checarPrimitiva(char *primitiva, int xInputed, int yInputed, char *fileNameInputed) {
+    int x = 600, y = 400, maxRGBRange = 255;
+    char *fileName = "image.ppm", *typeEncoding = "P3";
+
+    if (strcmp(primitiva, "image") == 0) {
+        x = xInputed;
+        y = yInputed;
+
+        PPMImage *image = makeStructPPMImage(x, y, maxRGBRange, fileName, typeEncoding);
+        createPPM(image);
+    } else {
+        if (strcmp(primitiva, "save") == 0) {
+            fileName = fileNameInputed;
+    
+            PPMImage *image = makeStructPPMImage(x, y, maxRGBRange, fileName, typeEncoding);
+            createPPM(image);
+        } else {
+            printf("Primitiva inválida");
+        }
+    }
+}
+
 int main(){
-    int x = 800, y = 600, maxRGBRange = 255;
-    char *fileName = "teste.ppm", *typeEncoding = "P3";
+    int xInputed, yInputed;
+    char *primitiva, *fileNameInputed;
+    
+    primitiva = malloc(sizeof(char));
+    fileNameInputed = malloc(sizeof(char));
 
-    PPMImage *image = makeStructPPMImage(x, y, maxRGBRange, fileName, typeEncoding);
+    scanf("%s %s", primitiva, fileNameInputed);
 
-    savePPM(image);
+    checarPrimitiva(primitiva, xInputed, yInputed, fileNameInputed);
 }
