@@ -51,36 +51,30 @@ static PPMImage *makeStructPPMImage(int x, int y, int maxRGBRange, char *fileNam
     return image;
 }
 
-void checarPrimitiva(char *primitiva, int xInputed, int yInputed, char *fileNameInputed) {
+void checarPrimitiva(char *argv[]) {
     int x = 600, y = 400, maxRGBRange = 255;
     char *fileName = "image.ppm", *typeEncoding = "P3";
-
-    if (strcmp(primitiva, "image") == 0 && xInputed > 0 && yInputed > 0) {
-        x = xInputed;
-        y = yInputed;
+    
+    if (strcmp(argv[1], "image") == 0 && atoi(argv[2]) > 0 && atoi(argv[3]) > 0) {
+        x = atoi(argv[2]);
+        y = atoi(argv[3]);
 
         PPMImage *image = makeStructPPMImage(x, y, maxRGBRange, fileName, typeEncoding);
         createPPM(image);
+        printf("\n Image criada");
     } else {
-        if (strcmp(primitiva, "save") == 0 && strcmp(fileNameInputed, "") != 0) {
-            fileName = fileNameInputed;
+        if (strcmp(argv[1], "save") == 0 && strcmp((char *)argv[2], "") != 0) {
+            fileName = (char *)argv[2];
     
             PPMImage *image = makeStructPPMImage(x, y, maxRGBRange, fileName, typeEncoding);
             createPPM(image);
+            printf("\n Image salva");
         } else {
             printf("Primitiva inválida");
         }
     }
 }
 
-int main(){
-    int xInputed = 0, yInputed = 0;
-    char *primitiva = "", *fileNameInputed = "";
-    
-    primitiva = malloc(sizeof(char));
-    fileNameInputed = malloc(sizeof(char));
-
-    scanf("%s %s", primitiva, fileNameInputed);
-
-    checarPrimitiva(primitiva, xInputed, yInputed, fileNameInputed);
+int main(int argc, char *argv[]){
+    checarPrimitiva(argv);
 }
