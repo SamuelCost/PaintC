@@ -51,30 +51,30 @@ static PPMImage *makeStructPPMImage(int x, int y, int maxRGBRange, char *fileNam
     return image;
 }
 
-void checarPrimitiva(char *argv[]) {
+void checkPrimitive(int argc, char *argv[]) {
     int x = 600, y = 400, maxRGBRange = 255;
     char *fileName = "image.ppm", *typeEncoding = "P3";
     
-    if (strcmp(argv[1], "image") == 0 && atoi(argv[2]) > 0 && atoi(argv[3]) > 0) {
+    if (argc == 4 && strcmp(argv[1], "image") == 0 && atoi(argv[2]) > 0 && atoi(argv[3]) > 0) {
         x = atoi(argv[2]);
         y = atoi(argv[3]);
 
         PPMImage *image = makeStructPPMImage(x, y, maxRGBRange, fileName, typeEncoding);
         createPPM(image);
-        printf("\n Image criada");
+        printf("Primitiva image realizada\n");
     } else {
-        if (strcmp(argv[1], "save") == 0 && strcmp((char *)argv[2], "") != 0) {
+        if (argc == 3 && strcmp(argv[1], "save") == 0 && strcmp((char *)argv[2], "") != 0) {
             fileName = (char *)argv[2];
     
             PPMImage *image = makeStructPPMImage(x, y, maxRGBRange, fileName, typeEncoding);
             createPPM(image);
-            printf("\n Image salva");
+            printf("Primitiva save realizada\n");
         } else {
-            printf("Primitiva inválida");
+            printf("Primitiva construída de forma incorreta\n");
         }
     }
 }
 
 int main(int argc, char *argv[]){
-    checarPrimitiva(argv);
+    checkPrimitive(argc, argv);
 }
