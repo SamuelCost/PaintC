@@ -51,30 +51,65 @@ static PPMImage *makeStructPPMImage(int x, int y, int maxRGBRange, char *fileNam
     return image;
 }
 
-void checkPrimitive(int argc, char *argv[]) {
-    int x = 600, y = 400, maxRGBRange = 255;
-    char *fileName = "image.ppm", *typeEncoding = "P3";
-    
-    if (argc == 4 && strcmp(argv[1], "image") == 0 && atoi(argv[2]) > 0 && atoi(argv[3]) > 0) {
-        x = atoi(argv[2]);
-        y = atoi(argv[3]);
+void commandInOperation(char *primitive){
+    if (strcmp(primitive, "image") == 0){
+        printf("teste");
+    }
+    if (strcmp(primitive, "color") == 0){
 
-        PPMImage *image = makeStructPPMImage(x, y, maxRGBRange, fileName, typeEncoding);
-        createPPM(image);
-        printf("Primitiva image realizada\n");
-    } else {
-        if (argc == 3 && strcmp(argv[1], "save") == 0 && strcmp((char *)argv[2], "") != 0) {
-            fileName = (char *)argv[2];
-    
-            PPMImage *image = makeStructPPMImage(x, y, maxRGBRange, fileName, typeEncoding);
-            createPPM(image);
-            printf("Primitiva save realizada\n");
-        } else {
-            printf("Primitiva construída de forma incorreta\n");
-        }
+    }
+    if (strcmp(primitive, "clear") == 0){
+
+    }
+    if (strcmp(primitive, "rect") == 0){
+
+    }
+    if (strcmp(primitive, "circle") == 0){
+
+    }
+    if (strcmp(primitive, "polygon") == 0){
+
+    }
+    if (strcmp(primitive, "fill") == 0){
+
+    }
+    if (strcmp(primitive, "save") == 0){
+
+    }
+    if (strcmp(primitive, "open") == 0){
+
     }
 }
 
-int main(int argc, char *argv[]){
-    checkPrimitive(argc, argv);
+void checkPrimitive(char *line) {
+    char primitiva[100];
+    int j = 0, i=0;
+    //for(int i = 0; i < strlen(palavras); i++){
+    while(line[i] != ' '){
+        primitiva[j] = line[i];
+        j++;
+        i++;
+    }
+    printf("%s", primitiva);
+    commandInOperation(primitiva);
+}
+
+int main(){  
+    char Linha[100];
+    char palavras[100];
+    int i = 0, contador = 0;
+  
+    FILE *arq;
+    // Abre um arquivo TEXTO para LEITURA
+    arq = fopen("ArqTeste.txt", "r");
+    if (arq == NULL)  // Se houve erro na abertura
+    {
+        printf("Problemas na abertura do arquivo\n");
+        return(0);
+    }
+    while (fgets(Linha, sizeof Linha, arq) != NULL){
+	    strcpy(palavras, Linha);
+        checkPrimitive(palavras);
+    }
+  fclose(arq);
 }
