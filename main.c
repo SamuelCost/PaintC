@@ -14,6 +14,11 @@ typedef struct {
      PPMPixel *matrizDePixels;
 } PPMImage;
 
+typedef struct {
+    char *primitiveName;
+    char *arguments[10];
+} PPMPrimitive;
+
 void createPPM(PPMImage *image) {
     FILE *fn;
 
@@ -51,65 +56,64 @@ static PPMImage *makeStructPPMImage(int x, int y, int maxRGBRange, char *fileNam
     return image;
 }
 
-void commandInOperation(char *primitive){
-    if (strcmp(primitive, "image") == 0){
-        printf("teste");
+void checkPrimitive(char *primitiveName){
+    if (strcmp(primitiveName, "image") == 0){
+        printf("Finded image primitive \n");
     }
-    if (strcmp(primitive, "color") == 0){
+    if (strcmp(primitiveName, "color") == 0){
 
     }
-    if (strcmp(primitive, "clear") == 0){
+    if (strcmp(primitiveName, "clear") == 0){
 
     }
-    if (strcmp(primitive, "rect") == 0){
+    if (strcmp(primitiveName, "rect") == 0){
 
     }
-    if (strcmp(primitive, "circle") == 0){
+    if (strcmp(primitiveName, "circle") == 0){
 
     }
-    if (strcmp(primitive, "polygon") == 0){
+    if (strcmp(primitiveName, "polygon") == 0){
 
     }
-    if (strcmp(primitive, "fill") == 0){
+    if (strcmp(primitiveName, "fill") == 0){
 
     }
-    if (strcmp(primitive, "save") == 0){
+    if (strcmp(primitiveName, "save") == 0){
 
     }
-    if (strcmp(primitive, "open") == 0){
+    if (strcmp(primitiveName, "open") == 0){
 
     }
 }
 
-void checkPrimitive(char *line) {
-    char primitiva[100];
-    int j = 0, i=0;
-    //for(int i = 0; i < strlen(palavras); i++){
-    while(line[i] != ' '){
-        primitiva[j] = line[i];
-        j++;
-        i++;
-    }
-    printf("%s", primitiva);
-    commandInOperation(primitiva);
+void extractArgumentsPrimitive(char *primitiveLine) {
+	char delimiter[] = " ";
+	char *primitiveName = strtok(primitiveLine, delimiter);
+    char *argument = strtok(primitiveLine, delimiter);
+    char *arguments[10];
+    int index = 0;
+    
+    checkPrimitive(primitiveName);
+
+    while (argument != NULL) {
+		argument = strtok(NULL, delimiter);
+        printf("\n%s", argument);
+	} 
 }
 
 int main(){  
-    char Linha[100];
-    char palavras[100];
-    int i = 0, contador = 0;
+    char primitiveLine[100];
   
     FILE *arq;
     // Abre um arquivo TEXTO para LEITURA
     arq = fopen("ArqTeste.txt", "r");
-    if (arq == NULL)  // Se houve erro na abertura
-    {
+    // Se houve erro na abertura
+    if (arq == NULL) {
         printf("Problemas na abertura do arquivo\n");
         return(0);
     }
-    while (fgets(Linha, sizeof Linha, arq) != NULL){
-	    strcpy(palavras, Linha);
-        checkPrimitive(palavras);
+    while (fgets(primitiveLine, 100, arq) != NULL){
+        extractArgumentsPrimitive(primitiveLine);
     }
-  fclose(arq);
+    fclose(arq);
 }
