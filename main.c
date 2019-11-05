@@ -88,17 +88,17 @@ void checkPrimitive(char *primitiveName){
 
 void extractArgumentsPrimitive(char *primitiveLine) {
 	char delimiter[] = " ";
-	char *primitiveName = strtok(primitiveLine, delimiter);
-    char *argument = strtok(primitiveLine, delimiter);
-    char *arguments[10];
-    int index = 0;
-    
-    checkPrimitive(primitiveName);
+	char *primitiveArgument = strtok(primitiveLine, delimiter);
+    char *primitiveArguments[10];
+    int i = -1;
 
-    while (argument != NULL) {
-		argument = strtok(NULL, delimiter);
-        printf("\n%s", argument);
-	} 
+    while (primitiveArgument != NULL) {
+        i++;
+        primitiveArguments[i] = primitiveArgument;
+		primitiveArgument = strtok(NULL, delimiter);
+	}
+
+    checkPrimitive(primitiveArguments[0]);
 }
 
 int main(){  
