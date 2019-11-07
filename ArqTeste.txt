@@ -1,4 +1,4 @@
 image 200 100
 save
 comand
-hahaha
+open image.ppm
