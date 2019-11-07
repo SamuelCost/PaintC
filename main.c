@@ -15,37 +15,38 @@ typedef struct {
 } PPMImage;
 
 typedef struct {
-    char *primitiveName;
+    char *name;
     char *arguments[100];
 } PPMPrimitive;
 
 PPMImage *imageGlobal;
 
-void createPPM(PPMImage *image) {
+void image(int x, int y) {
+    imageGlobal->matrizDePixels = (PPMPixel*)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
+}
+
+void save(char * fileName) {
     FILE *fn;
 
-    fn = fopen(image->fileName, "w+");
+    fn = fopen(fileName, "w+");
 
-    image->matrizDePixels = (PPMPixel*)malloc(image->x * image->y * sizeof(PPMPixel));
+    imageGlobal->matrizDePixels = (PPMPixel*)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
 
     // constrói o cabeçalho do PPM 
-    fprintf(fn, "%s\n", image->typeEncoding); // type enconding image
-    fprintf(fn, "%d %d\n", image->x, image->y); // dimension image
-    fprintf(fn, "%d\n", image->maxRGBRange); // max RGB value
+    fprintf(fn, "%s\n", imageGlobal->typeEncoding); // type enconding image
+    fprintf(fn, "%d %d\n", imageGlobal->x, imageGlobal->y); // dimension image
+    fprintf(fn, "%d\n", imageGlobal->maxRGBRange); // max RGB value
 
     // atribui uma cor padrão a todos os pixels da imagem
-    for (int i = 0; i < image->x * image->y; i++){
-        image->matrizDePixels[i].r = 255;
-        image->matrizDePixels[i].g = 0;
-        image->matrizDePixels[i].b = 0;
+    for (int i = 0; i < imageGlobal->x * imageGlobal->y; i++){
+        imageGlobal->matrizDePixels[i].r = 255;
+        imageGlobal->matrizDePixels[i].g = 0;
+        imageGlobal->matrizDePixels[i].b = 0;
 
-        fprintf(fn,"%d %d %d\n", image->matrizDePixels[i].r, image->matrizDePixels[i].g, image->matrizDePixels[i].b);
+        fprintf(fn,"%d %d %d\n", imageGlobal->matrizDePixels[i].r, imageGlobal->matrizDePixels[i].g, imageGlobal->matrizDePixels[i].b);
     }
 
     fclose(fn);
-
-    free(image->matrizDePixels);
-    free(image);
 }
 
 char *removeBreakLine(char *string){
@@ -65,7 +66,7 @@ void open(char *fileName) {
     arq = fopen(fileName, "r");
 
     if (arq == NULL) {
-        printf("Problemas na abertura do arquivo '%s'\n", fileName);
+        printf("\nProblemas na abertura do arquivo '%s'", fileName);
         exit(0);
     }
 
@@ -112,63 +113,61 @@ void open(char *fileName) {
     fclose(arq);
 }
 
-static PPMImage *makeStructPPMImage(int x, int y, int maxRGBRange, char *fileName, char *typeEncoding) {
-    PPMImage *image = (PPMImage *)malloc(sizeof(PPMImage));
-    image->x = x;
-    image->y = y;
-    image->maxRGBRange = maxRGBRange;
-    image->fileName = fileName;
-    image->typeEncoding = typeEncoding;
-    return image;
+void makeDefaultPPMImageGlobal() {
+    imageGlobal->x = 400;
+    imageGlobal->y = 200;
+    imageGlobal->maxRGBRange = 255;
+    imageGlobal->fileName = "image.ppm";
+    imageGlobal->typeEncoding = "P3";
 }
 
-void checkPrimitive(char *primitiveName, char *fileName){
-    if (strcmp(primitiveName, "image") == 0){
+void checkPrimitive(char *name, char *arguments[100]){
+    if (strcmp(name, "image") == 0){
         printf("Finded image primitive \n");
     }
-    if (strcmp(primitiveName, "color") == 0){
+    if (strcmp(name, "color") == 0){
 
     }
-    if (strcmp(primitiveName, "clear") == 0){
+    if (strcmp(name, "clear") == 0){
 
     }
-    if (strcmp(primitiveName, "rect") == 0){
+    if (strcmp(name, "rect") == 0){
 
     }
-    if (strcmp(primitiveName, "circle") == 0){
+    if (strcmp(name, "circle") == 0){
 
     }
-    if (strcmp(primitiveName, "polygon") == 0){
+    if (strcmp(name, "polygon") == 0){
 
     }
-    if (strcmp(primitiveName, "fill") == 0){
+    if (strcmp(name, "fill") == 0){
 
     }
-    if (strcmp(primitiveName, "save") == 0){
+    if (strcmp(name, "save") == 0){
 
     }
-    if (strcmp(primitiveName, "open") == 0){
-        open(fileName);
+    if (strcmp(name, "open") == 0){
+        open(arguments[0]);
     }
 }
 
 void extractArgumentsPrimitive(char *primitiveLine) {
 	char delimiter[] = " ";
-	char *primitiveArgument = strtok(primitiveLine, delimiter);
-    char *primitiveArguments[10];
+	char *primitiveName = strtok(primitiveLine, delimiter);
+	char *primitiveArgument = strtok(NULL, delimiter);
+    char *primitiveArguments[100];
     int i = -1;
 
     while (primitiveArgument != NULL) {
         i++;
         primitiveArguments[i] = removeBreakLine(primitiveArgument);
-        printf("\nLine size %s", removeBreakLine(primitiveArgument));
 		primitiveArgument = strtok(NULL, delimiter);
 	}
 
-    checkPrimitive(primitiveArguments[0], primitiveArguments[1]);
+    checkPrimitive(primitiveName, primitiveArguments);
 }
 
-int main(){  
+int main(){
     char primitiveLine[100];
   
     FILE *arq;
