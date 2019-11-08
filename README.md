@@ -11,7 +11,22 @@ Ferramenta de desenho gráfico em C
 
 ## Considerações iniciais
 
-O programa possui um arquivo chamado `primitives`, em que nele são específicados as primitivas suportadas descritas mais adiante
+O programa possui um arquivo chamado `primitives`, em que nele são específicados as primitivas suportadas descritas mais adiante.
+
+O arquivo deve possuir uma formatação como específicado neste exemplo:
+```
+image 600 400
+clear 0 0 0
+color 100 170 200
+line 0 400 600 200
+polygon 3 0 400 300 200 600 400
+circle 200 100 50
+color 180 30 50
+fill 300 300
+color 255 0 0
+fill 0 0
+save test.ppm
+```
 
 ## Como compilar o programa
 
