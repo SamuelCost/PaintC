@@ -1,4 +1,4 @@
 image 200 100
-save
-comand
 open image.ppm
+save ppm2.ppm
+comand

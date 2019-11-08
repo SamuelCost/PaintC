@@ -22,7 +22,8 @@ typedef struct {
 PPMImage *imageGlobal;
 
 void image(int x, int y) {
-    imageGlobal->matrizDePixels = (PPMPixel*)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
+    imageGlobal->x = x;
+    imageGlobal->y = y;
 }
 
 void save(char * fileName) {
@@ -33,6 +34,7 @@ void save(char * fileName) {
     imageGlobal->matrizDePixels = (PPMPixel*)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
 
     // constrói o cabeçalho do PPM 
+    printf("typeEncoding %s", imageGlobal->typeEncoding);
     fprintf(fn, "%s\n", imageGlobal->typeEncoding); // type enconding image
     fprintf(fn, "%d %d\n", imageGlobal->x, imageGlobal->y); // dimension image
     fprintf(fn, "%d\n", imageGlobal->maxRGBRange); // max RGB value
@@ -50,7 +52,7 @@ void save(char * fileName) {
 }
 
 char *removeBreakLine(char *string){
-    size_t sizeLine = strlen(string) - 1;
+    unsigned int sizeLine = strlen(string) - 1;
     if (*string && string[sizeLine] == '\n') {
         string[sizeLine] = '\0';
     }
@@ -58,7 +60,6 @@ char *removeBreakLine(char *string){
 }
 
 void open(char *fileName) {
-    imageGlobal = (PPMImage *)malloc(sizeof(PPMImage));
     char line[100];
     int lineIndex = -1;
 
@@ -89,7 +90,8 @@ void open(char *fileName) {
         lineIndex++;
         // armazena o typeEncoding na struct image global
         if (lineIndex == 0) {
-            imageGlobal->typeEncoding = lineArguments[0];
+            imageGlobal->typeEncoding = (char *)malloc(sizeof(char));
+            strcpy(imageGlobal->typeEncoding, removeBreakLine(lineArguments[0]));
         }
         // armazena o x e y (dimensões) na struct image global
         if (lineIndex == 1) {
@@ -114,6 +116,8 @@ void open(char *fileName) {
 }
 
 void makeDefaultPPMImageGlobal() {
+    imageGlobal = (PPMImage *)malloc(sizeof(PPMImage));
+
     imageGlobal->x = 400;
     imageGlobal->y = 200;
     imageGlobal->maxRGBRange = 255;
@@ -121,9 +125,39 @@ void makeDefaultPPMImageGlobal() {
     imageGlobal->typeEncoding = "P3";
 }
 
+// reference: https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/
+//Function for finding absolute value 
+int abs(int n) { 
+    return ( (n>0) ? n : ( n * (-1))); 
+} 
+  
+//DDA Function for line generation 
+void line(int X0, int Y0, int X1, int Y1) { 
+    // calculate dx & dy 
+    int dx = X1 - X0; 
+    int dy = Y1 - Y0; 
+  
+    // calculate steps required for generating pixels 
+    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy); 
+  
+    // calculate increment in x & y for each steps 
+    float Xinc = dx / (float) steps; 
+    float Yinc = dy / (float) steps; 
+  
+    // Put pixel for each step 
+    float X = X0; 
+    float Y = Y0; 
+    for (int i = 0; i <= steps; i++) { 
+        //printf("\n %f %f", X, Y);
+        // paint
+        X += Xinc;           // increment in x at each step 
+        Y += Yinc;           // increment in y at each step 
+    } 
+} 
+
 void checkPrimitive(char *name, char *arguments[100]){
     if (strcmp(name, "image") == 0){
-        printf("Finded image primitive \n");
+        image(atoi(arguments[0]), atoi(arguments[1]));
     }
     if (strcmp(name, "color") == 0){
 
@@ -144,7 +178,12 @@ void checkPrimitive(char *name, char *arguments[100]){
 
     }
     if (strcmp(name, "save") == 0){
+        printf("\n asdasd 2 %s", imageGlobal->typeEncoding);
 
+        save(arguments[0]);
+    }
+    if (strcmp(name, "line") == 0){
+        line(atoi(arguments[0]), atoi(arguments[1]), atoi(arguments[2]), atoi(arguments[3]));
     }
     if (strcmp(name, "open") == 0){
         open(arguments[0]);
@@ -168,6 +207,7 @@ void extractArgumentsPrimitive(char *primitiveLine) {
 }
 
 int main(){
+    makeDefaultPPMImageGlobal();
     char primitiveLine[100];
   
     FILE *arq;
@@ -182,4 +222,6 @@ int main(){
         extractArgumentsPrimitive(primitiveLine);
     }
     fclose(arq);
+
+    line(0, 400, 600, 20);
 }
