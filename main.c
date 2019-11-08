@@ -14,11 +14,6 @@ typedef struct {
      PPMPixel *matrizDePixels;
 } PPMImage;
 
-typedef struct {
-    char *name;
-    char *arguments[100];
-} PPMPrimitive;
-
 PPMImage *imageGlobal;
 
 void makeDefaultPPMImageGlobal() {
@@ -58,10 +53,6 @@ void save(char * fileName) {
 
     // atribui uma cor padrão a todos os pixels da imagem
     for (int i = 0; i < imageGlobal->x * imageGlobal->y; i++){
-    /*     imageGlobal->matrizDePixels[i].r = 255;
-        imageGlobal->matrizDePixels[i].g = 0;
-        imageGlobal->matrizDePixels[i].b = 0; */
-
         fprintf(fn,"%d %d %d\n", imageGlobal->matrizDePixels[i].r, imageGlobal->matrizDePixels[i].g, imageGlobal->matrizDePixels[i].b);
     }
 
@@ -77,6 +68,7 @@ void open(char *fileName) {
 
     if (arq == NULL) {
         printf("\nProblemas na abertura do arquivo '%s'", fileName);
+        exit(0);
     }
 
     // armazena o fileName na struct image global
@@ -150,8 +142,10 @@ int getPixelPosition(int x, int y) {
 0 0 0 0
 0 0 0 0
 0 0 0 0
-00 10 01 11
+1 2 3 4
 
+00 10 
+01 11
 
 0 1
 0 2
@@ -249,6 +243,7 @@ void readPrimitesFile() {
     // Se houve erro na abertura
     if (arq == NULL) {
         printf("Problemas na abertura do arquivo\n");
+        exit(0);
     }
     while (fgets(primitiveLine, 100, arq) != NULL){
         extractArgumentsPrimitive(primitiveLine);
