@@ -2,6 +2,8 @@
 Ferramenta de desenho gráfico em C
 
 ## Tipos de dados utilizados
+***
+
  - typedef
  - struct
  - int
@@ -10,22 +12,26 @@ Ferramenta de desenho gráfico em C
 
 ## Considerações iniciais
 ***
+
 O programa possui um arquivo chamado `primitives`, em que nele são específicados as primitivas suportadas descritas mais adiante
 
 ## Como compilar o programa
 ***
+
 ```
 gcc main.c -o main
 ```
 
 ## Como executar o programa
 ***
+
 ```
 ./main
 ```
 
 ## Primitivas suportadas
 ***
+
 ### Criar uma nova “imagem”, com a largura e altura especificadas
 ```
 image 100 100
