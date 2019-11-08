@@ -183,7 +183,7 @@ void line(int X0, int Y0, int X1, int Y1) {
         // paint
         X += Xinc;           // increment in x at each step 
         Y += Yinc;           // increment in y at each step 
-        printf("\n %d", getPixelPosition(X, Y));
+        //printf("\n %d", getPixelPosition(X, Y));
         initialPixelPPM = getPixelPosition(X, Y);
         imageGlobal->matrizDePixels[initialPixelPPM+i].r = 255;
         imageGlobal->matrizDePixels[initialPixelPPM+i].g = 443;
@@ -245,7 +245,7 @@ void readPrimitesFile() {
   
     FILE *arq;
     // Abre um arquivo TEXTO para LEITURA
-    arq = fopen("ArqTeste.txt", "r");
+    arq = fopen("primitives", "r");
     // Se houve erro na abertura
     if (arq == NULL) {
         printf("Problemas na abertura do arquivo\n");
