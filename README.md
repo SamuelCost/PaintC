@@ -11,7 +11,7 @@ Ferramenta de desenho gráfico em C
 
 ## Considerações iniciais
 
-O programa possui um arquivo chamado `primitives`, em que nele são específicados as primitivas suportadas descritas mais adiante.
+O programa possui um arquivo chamado `primitives`, em que nele são específicadas as primitivas suportadas descritas mais adiante.
 
 O arquivo deve possuir uma formatação como específicado neste exemplo:
 ```
