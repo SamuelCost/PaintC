@@ -125,12 +125,10 @@ int getPixelPosition(int x, int y) {
     int position = -1;
 
     for (int i = 0; i < imageGlobal->x; i++){
-        if(x == i) {
-            for (int j = 0; j < imageGlobal->y; j++){
-                position++;
-                if(y == j) {
-                    break;
-                }
+        for (int j = 0; j < imageGlobal->y; j++){
+            position++;
+            if(x == i && y == j) {
+                break;
             }
         }
     }
@@ -175,13 +173,14 @@ void line(int X0, int Y0, int X1, int Y1) {
     for (int i = 0; i < steps; i++){
         //printf("\n %f %f", X, Y);
         // paint
-        X += Xinc;           // increment in x at each step 
-        Y += Yinc;           // increment in y at each step 
         //printf("\n %d", getPixelPosition(X, Y));
         initialPixelPPM = getPixelPosition(X, Y);
+        printf("\n%d %d %d", X, Y, initialPixelPPM);
         imageGlobal->matrizDePixels[initialPixelPPM+i].r = 255;
         imageGlobal->matrizDePixels[initialPixelPPM+i].g = 443;
         imageGlobal->matrizDePixels[initialPixelPPM+i].b = 234;
+        X += Xinc;           // increment in x at each step 
+        Y += Yinc;           // increment in y at each step 
     } 
 } 
 
