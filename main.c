@@ -128,11 +128,10 @@ int getPixelPosition(int x, int y) {
         for (int j = 0; j < imageGlobal->y; j++){
             position++;
             if(x == i && y == j) {
-                break;
+                return position;
             }
         }
     }
-    return position;
 }
 
 /*

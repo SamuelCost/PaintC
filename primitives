@@ -1,6 +1,5 @@
 open image.ppm
-image 4 4
-color 40 40 40
-line 0 0 2 2
+image 200 100
+line 0 30 150 50
 save ppm2.ppm
 comand
