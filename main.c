@@ -34,11 +34,21 @@ char *removeBreakLine(char *string){
     return string;
 }
 
+void drawAllPixels() {
+    int r = 0, g = 0, b = 0;
+    for (int i = 0; i < imageGlobal->x * imageGlobal->y; i++){
+        imageGlobal->matrizDePixels[i].r = r;
+        imageGlobal->matrizDePixels[i].g = g;
+        imageGlobal->matrizDePixels[i].b = b;
+    }
+}
+
 void image(int x, int y) {
     imageGlobal->x = x;
     imageGlobal->y = y;
 
-    imageGlobal->matrizDePixels = (PPMPixel*)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
+    imageGlobal->matrizDePixels = (PPMPixel *)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
+    drawAllPixels();
 }
 
 void save(char * fileName) {
@@ -97,7 +107,7 @@ void open(char *fileName) {
         if (lineIndex == 1) {
             imageGlobal->x = atoi(lineArguments[0]);
             imageGlobal->y = atoi(lineArguments[1]);
-            imageGlobal->matrizDePixels = (PPMPixel*)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
+            imageGlobal->matrizDePixels = (PPMPixel *)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
         }
         // armazena o maxRGBRange na struct image global
         if (lineIndex == 2) {
@@ -115,18 +125,19 @@ void open(char *fileName) {
     fclose(arq);
 }
 
-// reference: https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/
-//Function for finding absolute value 
-int abs(int n) { 
-    return ( (n>0) ? n : ( n * (-1))); 
+int drawPixelPPM(int pixelPosition) {
+    int r = 255, g = 243, b = 234;
+    imageGlobal->matrizDePixels[pixelPosition].r = r;
+    imageGlobal->matrizDePixels[pixelPosition].g = g;
+    imageGlobal->matrizDePixels[pixelPosition].b = b;
 }
 
 int getPixelPosition(int x, int y) {
-    int position = -1;
+    int position = (imageGlobal->x * imageGlobal->y);
 
     for (int i = 0; i < imageGlobal->x; i++){
-        for (int j = 0; j < imageGlobal->y; j++){
-            position++;
+        for (int j = imageGlobal->y - 1; j >= 0 ; j--){
+            position--;
             if(x == i && y == j) {
                 return position;
             }
@@ -134,54 +145,22 @@ int getPixelPosition(int x, int y) {
     }
 }
 
-/*
-0 0 0 0
-0 0 0 0
-0 0 0 0
-0 0 0 0
-1 2 3 4
+void line(int x0, int y0, int x1, int y1) {
+    int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+    int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1; 
+    int err = (dx > dy ? dx : -dy) / 2, e2 = 0;
 
-00 10 
-01 11
-
-0 1
-0 2
-0 3
-0 4
-
-*/
-//DDA Function for line generation 
-void line(int X0, int Y0, int X1, int Y1) { 
-    // calculate dx & dy 
-    int dx = X1 - X0; 
-    int dy = Y1 - Y0; 
-  
-    // calculate steps required for generating pixels 
-    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy); 
-  
-    // calculate increment in x & y for each steps 
-    int Xinc = dx / (int) steps; 
-    int Yinc = dy / (int) steps; 
-  
-    // Put pixel for each step 
-    int X = X0; 
-    int Y = Y0; 
-
-    int initialPixelPPM = 0;
+    int maxPixelSteps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
     
-    for (int i = 0; i < steps; i++){
-        //printf("\n %f %f", X, Y);
-        // paint
-        //printf("\n %d", getPixelPosition(X, Y));
-        initialPixelPPM = getPixelPosition(X, Y);
-        printf("\n%d %d %d", X, Y, initialPixelPPM);
-        imageGlobal->matrizDePixels[initialPixelPPM+i].r = 255;
-        imageGlobal->matrizDePixels[initialPixelPPM+i].g = 443;
-        imageGlobal->matrizDePixels[initialPixelPPM+i].b = 234;
-        X += Xinc;           // increment in x at each step 
-        Y += Yinc;           // increment in y at each step 
-    } 
-} 
+    for (int i = 0; i <= maxPixelSteps; i++) {
+        int pixelPosition = getPixelPosition(x0, y0);
+        drawPixelPPM(pixelPosition);
+        if (x0==x1 && y0==y1) break;
+        e2 = err;
+        if (e2 > -dx) { err -= dy; x0 += sx; }
+        if (e2 < dy) { err += dx; y0 += sy; }
+    }
+}
 
 void checkPrimitive(char *name, char *arguments[100]){
     if (strcmp(name, "image") == 0){
@@ -253,3 +232,12 @@ int main(){
     makeDefaultPPMImageGlobal();
     readPrimitesFile();
 }
+
+
+/* 
+
+0 0 0
+0 0 0
+0 0 0
+
+*/

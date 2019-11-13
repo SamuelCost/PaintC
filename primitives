@@ -1,5 +1,5 @@
 open image.ppm
-image 200 100
-line 0 30 150 50
+image 100 200
+line 0 0 50 50
 save ppm2.ppm
 comand
