@@ -127,7 +127,15 @@ void open(char *fileName) {
     fclose(arq);
 }
 
-int drawPixelPPM(int pixelPosition) {
+int drawPixelPPM(int pixelPosition, int x, int y) {
+    if (pixelPosition == -1) {
+        printf("\nCircle: x, y (%d, %d)", x, y);
+        pixelPosition = (y * imageGlobal->y) - x;
+        printf("\nPosition: (%d)", pixelPosition);
+    } else {
+        printf("\nLine: x, y (%d, %d)", x, y);
+        printf("\nPosition: (%d)", pixelPosition);
+    }
     int r = 255, g = 0, b = 0;
     imageGlobal->matrizDePixels[pixelPosition].r = r;
     imageGlobal->matrizDePixels[pixelPosition].g = g;
@@ -150,13 +158,47 @@ void line(int x0, int y0, int x1, int y1) {
     int maxPixelSteps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
     
     for (int i = 0; i <= maxPixelSteps; i++) {
-        int pixelPosition = y0 * imageGlobal->y + (x0 >= x1 ? x0 : - x0);
-        drawPixelPPM(pixelPosition);
+        int pixelPosition = y0 * imageGlobal->y - x0;
+        drawPixelPPM(pixelPosition, -1, -1);
         if (x0==x1 && y0==y1) break;
         e2 = err;
         if (e2 > -dx) { err -= dy; x0 += sx; }
         if (e2 < dy) { err += dx; y0 += sy; }
     }
+}
+
+void drawCircle(int xc, int yc, int x, int y) { 
+    drawPixelPPM(-1, xc+x, yc+y); 
+    drawPixelPPM(-1, xc-x, yc+y); 
+    drawPixelPPM(-1, xc+x, yc-y); 
+    drawPixelPPM(-1, xc-x, yc-y); 
+    drawPixelPPM(-1, xc+y, yc+x); 
+    drawPixelPPM(-1, xc-y, yc+x); 
+    drawPixelPPM(-1, xc+y, yc-x); 
+    drawPixelPPM(-1, xc-y, yc-x); 
+} 
+
+void cicle(int xc, int yc, int r) { 
+    int x = 0, y = r; 
+    int d = 3 - 2 * r; 
+    drawCircle(xc, yc, x, y); 
+    while (y >= x) { 
+        // for each pixel we will 
+        // draw all eight pixels 
+          
+        x++; 
+  
+        // check for decision parameter 
+        // and correspondingly  
+        // update d, x, y 
+        if (d > 0) { 
+            y--;  
+            d = d + 4 * (x - y) + 10; 
+        } else {
+            d = d + 4 * x + 6; 
+        }
+        drawCircle(xc, yc, x, y); 
+    } 
 }
 
 void checkPrimitive(char *name, char *arguments[100]){
@@ -173,7 +215,7 @@ void checkPrimitive(char *name, char *arguments[100]){
 
     }
     if (strcmp(name, "circle") == 0){
-
+        cicle(atoi(arguments[0]), atoi(arguments[1]), atoi(arguments[2]));
     }
     if (strcmp(name, "polygon") == 0){
 
