@@ -60,7 +60,12 @@ open imageTest.ppm
 ```
 > Irá abrir um arquivo PPM para operações
 
-### Especifica os dois pontos das extremidades da linha a ser desenhada, cada um com suas coordenadas (x, y) - `WIP`
+### Especifica os dois pontos das extremidades da linha a ser desenhada, cada um com suas coordenadas (x, y)
 ```
 line 0 400 600 200
+```
+
+### Desenha um círculo nas posições x, y e tamanho especificados
+```
+circle 200 100 50
 ```
