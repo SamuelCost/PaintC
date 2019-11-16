@@ -62,7 +62,7 @@ void save(char * fileName) {
     fprintf(fn, "%d\n", imageGlobal->maxRGBRange); // max RGB value
 
     // atribui uma cor padrão a todos os pixels da imagem
-    for (int i = 0; i < imageGlobal->x * imageGlobal->y; i++){
+    for (int i = (imageGlobal->x * imageGlobal->y) - 1; i >= 0 ; i--){
         fprintf(fn,"%d %d %d\n", imageGlobal->matrizDePixels[i].r, imageGlobal->matrizDePixels[i].g, imageGlobal->matrizDePixels[i].b);
     }
 
@@ -116,9 +116,11 @@ void open(char *fileName) {
         // armazena os pixels na struct image global
         // lineIndex - 3: a matriz de pixels começa a contar a partir da terceira linha
         if (lineIndex > 2) {
-            imageGlobal->matrizDePixels[lineIndex - 3].r = atoi(lineArguments[0]);
-            imageGlobal->matrizDePixels[lineIndex - 3].g = atoi(lineArguments[1]);
-            imageGlobal->matrizDePixels[lineIndex - 3].b = atoi(lineArguments[2]);
+            int pixelsSize = imageGlobal->x * imageGlobal->y;
+            int index = pixelsSize - (lineIndex - 3);
+            imageGlobal->matrizDePixels[index].r = atoi(lineArguments[0]);
+            imageGlobal->matrizDePixels[index].g = atoi(lineArguments[1]);
+            imageGlobal->matrizDePixels[index].b = atoi(lineArguments[2]);
         }
     }
 
@@ -126,23 +128,18 @@ void open(char *fileName) {
 }
 
 int drawPixelPPM(int pixelPosition) {
-    int r = 255, g = 243, b = 234;
+    int r = 255, g = 0, b = 0;
     imageGlobal->matrizDePixels[pixelPosition].r = r;
     imageGlobal->matrizDePixels[pixelPosition].g = g;
     imageGlobal->matrizDePixels[pixelPosition].b = b;
 }
 
 int getPixelPosition(int x, int y) {
-    int position = (imageGlobal->x * imageGlobal->y);
-
-    for (int i = 0; i < imageGlobal->x; i++){
-        for (int j = imageGlobal->y - 1; j >= 0 ; j--){
-            position--;
-            if(x == i && y == j) {
-                return position;
-            }
-        }
+    int rowSize = 0;
+    for (int i = imageGlobal->y; i > y; i--) {
+        rowSize++;
     }
+    return rowSize * imageGlobal->y + x;
 }
 
 void line(int x0, int y0, int x1, int y1) {
@@ -153,7 +150,7 @@ void line(int x0, int y0, int x1, int y1) {
     int maxPixelSteps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
     
     for (int i = 0; i <= maxPixelSteps; i++) {
-        int pixelPosition = getPixelPosition(x0, y0);
+        int pixelPosition = y0 * imageGlobal->y + (x0 >= x1 ? x0 : - x0);
         drawPixelPPM(pixelPosition);
         if (x0==x1 && y0==y1) break;
         e2 = err;
