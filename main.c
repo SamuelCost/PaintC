@@ -61,7 +61,7 @@ void save(char * fileName) {
     fprintf(fn, "%d %d\n", imageGlobal->x, imageGlobal->y); // dimension image
     fprintf(fn, "%d\n", imageGlobal->maxRGBRange); // max RGB value
 
-    // atribui uma cor padrão a todos os pixels da imagem
+    // atribui uma cor padrão a todos os pixels da imagem, como foi lido na ordem inversa, é escrito invertido
     for (int i = (imageGlobal->x * imageGlobal->y) - 1; i >= 0 ; i--){
         fprintf(fn,"%d %d %d\n", imageGlobal->matrizDePixels[i].r, imageGlobal->matrizDePixels[i].g, imageGlobal->matrizDePixels[i].b);
     }
@@ -115,6 +115,7 @@ void open(char *fileName) {
         }
         // armazena os pixels na struct image global
         // lineIndex - 3: a matriz de pixels começa a contar a partir da terceira linha
+        // armazena os pixels na ordem inversa
         if (lineIndex > 2) {
             int pixelsSize = imageGlobal->x * imageGlobal->y;
             int index = pixelsSize - (lineIndex - 3);
@@ -127,15 +128,8 @@ void open(char *fileName) {
     fclose(arq);
 }
 
-int drawPixelPPM(int pixelPosition, int x, int y) {
-    if (pixelPosition == -1) {
-        printf("\nCircle: x, y (%d, %d)", x, y);
-        pixelPosition = (y * imageGlobal->y) - x;
-        printf("\nPosition: (%d)", pixelPosition);
-    } else {
-        printf("\nLine: x, y (%d, %d)", x, y);
-        printf("\nPosition: (%d)", pixelPosition);
-    }
+int drawPixelPPM(int x, int y) {
+    int pixelPosition = (y * imageGlobal->y) - x;
     int r = 255, g = 0, b = 0;
     imageGlobal->matrizDePixels[pixelPosition].r = r;
     imageGlobal->matrizDePixels[pixelPosition].g = g;
@@ -158,8 +152,7 @@ void line(int x0, int y0, int x1, int y1) {
     int maxPixelSteps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
     
     for (int i = 0; i <= maxPixelSteps; i++) {
-        int pixelPosition = y0 * imageGlobal->y - x0;
-        drawPixelPPM(pixelPosition, -1, -1);
+        drawPixelPPM(x0, y0);
         if (x0==x1 && y0==y1) break;
         e2 = err;
         if (e2 > -dx) { err -= dy; x0 += sx; }
@@ -168,14 +161,14 @@ void line(int x0, int y0, int x1, int y1) {
 }
 
 void drawCircle(int xc, int yc, int x, int y) { 
-    drawPixelPPM(-1, xc+x, yc+y); 
-    drawPixelPPM(-1, xc-x, yc+y); 
-    drawPixelPPM(-1, xc+x, yc-y); 
-    drawPixelPPM(-1, xc-x, yc-y); 
-    drawPixelPPM(-1, xc+y, yc+x); 
-    drawPixelPPM(-1, xc-y, yc+x); 
-    drawPixelPPM(-1, xc+y, yc-x); 
-    drawPixelPPM(-1, xc-y, yc-x); 
+    drawPixelPPM(xc+x, yc+y); 
+    drawPixelPPM(xc-x, yc+y); 
+    drawPixelPPM(xc+x, yc-y); 
+    drawPixelPPM(xc-x, yc-y); 
+    drawPixelPPM(xc+y, yc+x); 
+    drawPixelPPM(xc-y, yc+x); 
+    drawPixelPPM(xc+y, yc-x); 
+    drawPixelPPM(xc-y, yc-x); 
 } 
 
 void cicle(int xc, int yc, int r) { 
