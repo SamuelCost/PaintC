@@ -69,3 +69,13 @@ line 0 400 600 200
 ```
 circle 200 100 50
 ```
+
+### Limpa a imagem, setando todos os pixels para a cor especificada
+```
+clear 0 0 0
+```
+
+### Muda a cor atual para uma cor especificada
+```
+color 100 170 200
+```

@@ -14,16 +14,28 @@ typedef struct {
      PPMPixel *matrizDePixels;
 } PPMImage;
 
+// struct que define a cor do pincel atual
+typedef struct {
+    int r, g, b;
+} PPMColor;
+
+
+// struct do objeto PPM manipulado em tempo de execução
 PPMImage *imageGlobal;
+PPMColor *ppmColor;
 
 void makeDefaultPPMImageGlobal() {
     imageGlobal = (PPMImage *)malloc(sizeof(PPMImage));
+    ppmColor = (PPMColor *)malloc(sizeof(PPMColor));
 
     imageGlobal->x = 400;
     imageGlobal->y = 200;
     imageGlobal->maxRGBRange = 255;
     imageGlobal->fileName = "image.ppm";
     imageGlobal->typeEncoding = "P3";
+    ppmColor->r = 255;
+    ppmColor->g = 0;
+    ppmColor->b = 0;
 }
 
 char *removeBreakLine(char *string){
@@ -34,8 +46,13 @@ char *removeBreakLine(char *string){
     return string;
 }
 
-void drawAllPixels() {
-    int r = 0, g = 0, b = 0;
+void color(int r, int g, int b) {
+    ppmColor->r = r;
+    ppmColor->g = g;
+    ppmColor->b = b;
+}
+
+void clear(int r, int g, int b) {
     for (int i = 0; i < imageGlobal->x * imageGlobal->y; i++){
         imageGlobal->matrizDePixels[i].r = r;
         imageGlobal->matrizDePixels[i].g = g;
@@ -48,7 +65,7 @@ void image(int x, int y) {
     imageGlobal->y = y;
 
     imageGlobal->matrizDePixels = (PPMPixel *)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
-    drawAllPixels();
+    clear(0, 0, 0);
 }
 
 void save(char * fileName) {
@@ -130,10 +147,9 @@ void open(char *fileName) {
 
 int drawPixelPPM(int x, int y) {
     int pixelPosition = (y * imageGlobal->y) - x;
-    int r = 255, g = 0, b = 0;
-    imageGlobal->matrizDePixels[pixelPosition].r = r;
-    imageGlobal->matrizDePixels[pixelPosition].g = g;
-    imageGlobal->matrizDePixels[pixelPosition].b = b;
+    imageGlobal->matrizDePixels[pixelPosition].r = ppmColor->r;
+    imageGlobal->matrizDePixels[pixelPosition].g = ppmColor->g;
+    imageGlobal->matrizDePixels[pixelPosition].b = ppmColor->b;
 }
 
 void line(int x0, int y0, int x1, int y1) {
@@ -191,10 +207,10 @@ void checkPrimitive(char *name, char *arguments[100]){
         image(atoi(arguments[0]), atoi(arguments[1]));
     }
     if (strcmp(name, "color") == 0){
-
+        color(atoi(arguments[0]), atoi(arguments[1]), atoi(arguments[2]));
     }
     if (strcmp(name, "clear") == 0){
-
+        clear(atoi(arguments[0]), atoi(arguments[1]), atoi(arguments[2]));
     }
     if (strcmp(name, "rect") == 0){
 
