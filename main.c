@@ -136,14 +136,6 @@ int drawPixelPPM(int x, int y) {
     imageGlobal->matrizDePixels[pixelPosition].b = b;
 }
 
-int getPixelPosition(int x, int y) {
-    int rowSize = 0;
-    for (int i = imageGlobal->y; i > y; i--) {
-        rowSize++;
-    }
-    return rowSize * imageGlobal->y + x;
-}
-
 void line(int x0, int y0, int x1, int y1) {
     int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
     int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1; 
