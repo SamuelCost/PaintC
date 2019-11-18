@@ -15,7 +15,7 @@ typedef struct {
     int r, g, b;
 } PPMColor;
 
-
 // struct do objeto PPM manipulado em tempo de execução
 PPMImage *imageGlobal;
 PPMColor *ppmColor;
+PPMColor *backgroundColor;

@@ -15,10 +15,10 @@ void checkPrimitive(char *name, char *arguments[100]){
         cicle(atoi(arguments[0]), atoi(arguments[1]), atoi(arguments[2]));
     }
     if (strcmp(name, "polygon") == 0){
-
+        polygon(arguments);
     }
     if (strcmp(name, "fill") == 0){
-
+        fill(atoi(arguments[0]), atoi(arguments[1]));
     }
     if (strcmp(name, "save") == 0){
         save(arguments[0]);

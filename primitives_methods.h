@@ -1,6 +1,7 @@
 void makeDefaultPPMImageGlobal() {
     imageGlobal = (PPMImage *)malloc(sizeof(PPMImage));
     ppmColor = (PPMColor *)malloc(sizeof(PPMColor));
+    backgroundColor = (PPMColor *)malloc(sizeof(PPMColor));
 
     imageGlobal->x = 400;
     imageGlobal->y = 200;
@@ -10,6 +11,9 @@ void makeDefaultPPMImageGlobal() {
     ppmColor->r = 255;
     ppmColor->g = 0;
     ppmColor->b = 0;
+    backgroundColor->r = 255;
+    backgroundColor->g = 255;
+    backgroundColor->b = 255;
 }
 
 char *removeBreakLine(char *string){
@@ -27,10 +31,45 @@ void color(int r, int g, int b) {
 }
 
 void clear(int r, int g, int b) {
+    backgroundColor->r = r;
+    backgroundColor->g = g;
+    backgroundColor->b = b;
     for (int i = 0; i < imageGlobal->x * imageGlobal->y; i++){
         imageGlobal->matrizDePixels[i].r = r;
         imageGlobal->matrizDePixels[i].g = g;
         imageGlobal->matrizDePixels[i].b = b;
+    }
+}
+
+void fill(int x, int y){
+    int borda = 0;
+    int i = (y * imageGlobal->y) - x;
+    imageGlobal->matrizDePixels[i].r = 0;
+    imageGlobal->matrizDePixels[i].g = 0;
+    imageGlobal->matrizDePixels[i].b = 0; 
+    for (i; i < imageGlobal->x * imageGlobal->y; i++){
+        if (backgroundColor->r == imageGlobal->matrizDePixels[i].r && backgroundColor->g == imageGlobal->matrizDePixels[i].g && backgroundColor->b == imageGlobal->matrizDePixels[i].b){
+            borda = 0;
+        }else{
+            borda = 1;
+        }
+        if (borda == 0){
+            imageGlobal->matrizDePixels[i].r = 90;
+            imageGlobal->matrizDePixels[i].g = 172;
+            imageGlobal->matrizDePixels[i].b = 68;
+        }
+    }
+    for(i = 0; i < ((y * imageGlobal->y) - x); i++){
+        if (backgroundColor->r == imageGlobal->matrizDePixels[i].r && backgroundColor->g == imageGlobal->matrizDePixels[i].g && backgroundColor->b == imageGlobal->matrizDePixels[i].b){
+            borda = 0;
+        }else{
+            borda = 1;
+        }
+        if (borda == 0){
+            imageGlobal->matrizDePixels[i].r = 90;
+            imageGlobal->matrizDePixels[i].g = 172;
+            imageGlobal->matrizDePixels[i].b = 68;
+        }
     }
 }
 
@@ -39,7 +78,7 @@ void image(int x, int y) {
     imageGlobal->y = y;
 
     imageGlobal->matrizDePixels = (PPMPixel *)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
-    clear(0, 0, 0);
+    clear(255, 255, 255);
 }
 
 void save(char * fileName) {
@@ -174,4 +213,21 @@ void cicle(int xc, int yc, int r) {
         }
         drawCircle(xc, yc, x, y); 
     } 
+} 
+
+void polygon(char **arguments){
+    int p1 = 1, p2 = 2, p3 = 3, p4 = 4;
+    int sides = atoi(arguments[0]);
+    for (int i = 0; i < sides - 1; i++){
+        line(atoi(arguments[p1]), atoi(arguments[p2]), atoi(arguments[p3]), atoi(arguments[p4]));
+        p1 = p3;
+        p2 = p4;
+        p3 += 2;
+        p4 += 2;
+    }
+    p1 = 1;
+    p2 = 2;
+    p3 -= 2;
+    p4 -= 2;
+    line(atoi(arguments[p3]), atoi(arguments[p4]), atoi(arguments[p1]), atoi(arguments[p2]));
 }

@@ -1,9 +1,6 @@
 open image.ppm
 image 100 100
-clear 0 0 0
-color 164 235 52
-line 0 0 99 99
-color 195 52 235
-circle 20 90 10
+polygon 3 50 75 75 25 25 25
+fill 50 50
 save ppm2.ppm
 comand
