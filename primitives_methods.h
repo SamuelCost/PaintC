@@ -44,32 +44,37 @@ void clear(int r, int g, int b) {
 void fill(int x, int y){
     int borda = 0;
     int i = (y * imageGlobal->y) - x;
-    imageGlobal->matrizDePixels[i].r = 0;
-    imageGlobal->matrizDePixels[i].g = 0;
-    imageGlobal->matrizDePixels[i].b = 0; 
     for (i; i < imageGlobal->x * imageGlobal->y; i++){
         if (backgroundColor->r == imageGlobal->matrizDePixels[i].r && backgroundColor->g == imageGlobal->matrizDePixels[i].g && backgroundColor->b == imageGlobal->matrizDePixels[i].b){
-            borda = 0;
+            if (borda != 1){
+                imageGlobal->matrizDePixels[i].r = 90;
+                imageGlobal->matrizDePixels[i].g = 172;
+                imageGlobal->matrizDePixels[i].b = 68; 
+            }
         }else{
-            borda = 1;
+            if (borda == 1){
+                borda = 0;
+            }else{
+                borda = 1;
+            }
         }
-        if (borda == 0){
-            imageGlobal->matrizDePixels[i].r = 90;
-            imageGlobal->matrizDePixels[i].g = 172;
-            imageGlobal->matrizDePixels[i].b = 68;
-        }
+
     }
     for(i = 0; i < ((y * imageGlobal->y) - x); i++){
         if (backgroundColor->r == imageGlobal->matrizDePixels[i].r && backgroundColor->g == imageGlobal->matrizDePixels[i].g && backgroundColor->b == imageGlobal->matrizDePixels[i].b){
-            borda = 0;
+            if (borda != 1){
+                imageGlobal->matrizDePixels[i].r = 90;
+                imageGlobal->matrizDePixels[i].g = 172;
+                imageGlobal->matrizDePixels[i].b = 68; 
+            }
         }else{
-            borda = 1;
+            if (borda == 1){
+                borda = 0;
+            }else{
+                borda = 1;
+            }
         }
-        if (borda == 0){
-            imageGlobal->matrizDePixels[i].r = 90;
-            imageGlobal->matrizDePixels[i].g = 172;
-            imageGlobal->matrizDePixels[i].b = 68;
-        }
+
     }
 }
 

@@ -1,6 +1,6 @@
 open image.ppm
 image 100 100
-polygon 3 50 75 75 25 25 25
-fill 50 50
+polygon 4 25 25 25 75 75 75 75 25
+fill 99 99
 save ppm2.ppm
 comand
