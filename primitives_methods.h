@@ -1,5 +1,6 @@
 void makeDefaultPPMImageGlobal() {
     imageGlobal = (PPMImage *)malloc(sizeof(PPMImage));
+    imageRotate = (PPMImage *)malloc(sizeof(PPMImage));
     ppmColor = (PPMColor *)malloc(sizeof(PPMColor));
     backgroundColor = (PPMColor *)malloc(sizeof(PPMColor));
 
@@ -83,8 +84,49 @@ void image(int x, int y) {
     imageGlobal->y = y;
 
     imageGlobal->matrizDePixels = (PPMPixel *)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
+    imageRotate->matrizDePixels = (PPMPixel *)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
     clear(255, 255, 255);
 }
+
+void rotate (){
+    printf("teste");
+    imageRotate->matrizDePixels = imageGlobal->matrizDePixels;
+    imageRotate->x = imageGlobal->y;
+    imageRotate->y = imageGlobal->x;
+
+    int i = 0;
+    int j = imageGlobal->x;
+    int aux, count = 0;
+    for (i; i < imageGlobal->y; i++){
+        for (j; j > 0; j--){
+            
+            aux = i + ((j-1)*imageGlobal->y);
+            printf("%i", aux);
+            imageRotate->matrizDePixels[count].r = imageGlobal->matrizDePixels[aux].r;
+            imageRotate->matrizDePixels[count].g = imageGlobal->matrizDePixels[aux].g;
+            imageRotate->matrizDePixels[count].b = imageGlobal->matrizDePixels[aux].b;
+            count += 1;
+        }
+    }
+    imageGlobal->x = imageRotate->x;
+    imageGlobal->y = imageRotate->y;
+    for (i = 0; i < imageGlobal->x * imageGlobal->y; i++){
+        imageGlobal->matrizDePixels[i].r = imageRotate->matrizDePixels[i].r;
+        imageGlobal->matrizDePixels[i].g = imageRotate->matrizDePixels[i].g;
+        imageGlobal->matrizDePixels[i].b = imageRotate->matrizDePixels[i].b; 
+    }
+
+}
+
+/* 1  2  3  4  5     posiçãoRotação = i + ((j-1) * (y));
+6  7  8  9  10
+11 12 13 14 15
+
+11 6  1
+12 7  2
+13 8  3
+14 9  4
+15 10 5 */
 
 void save(char * fileName) {
     FILE *fn;
@@ -165,7 +207,6 @@ void open(char *fileName) {
 
 int drawPixelPPM(int x, int y) {
     int pixelPosition = (y * imageGlobal->y) - x;
-    printf("\n %d", pixelPosition);
     imageGlobal->matrizDePixels[pixelPosition].r = ppmColor->r;
     imageGlobal->matrizDePixels[pixelPosition].g = ppmColor->g;
     imageGlobal->matrizDePixels[pixelPosition].b = ppmColor->b;
@@ -245,6 +286,7 @@ void flip(char *orientation) {
             for(int x = 0; x < halfHorizontal; x++){
                 int rightPixelPosition = abs((y * imageGlobal->y) - (imageGlobal->x - x -1));
                 int leftPixelPosition = abs((y * imageGlobal->y) - x);
+
                 PPMPixel pixel = imageGlobal->matrizDePixels[leftPixelPosition];
                 imageGlobal->matrizDePixels[leftPixelPosition] = imageGlobal->matrizDePixels[rightPixelPosition];
                 imageGlobal->matrizDePixels[rightPixelPosition] = pixel;
@@ -258,6 +300,7 @@ void flip(char *orientation) {
             for(int x = 0; x < imageGlobal->x; x++){
                 int topPixelPosition = abs(((imageGlobal->y - y -1) * imageGlobal->y) - x);
                 int bottomPixelPosition = abs((y * imageGlobal->y) - x);
+                
                 PPMPixel pixel = imageGlobal->matrizDePixels[bottomPixelPosition];
                 imageGlobal->matrizDePixels[bottomPixelPosition] = imageGlobal->matrizDePixels[topPixelPosition];
                 imageGlobal->matrizDePixels[topPixelPosition] = pixel;
