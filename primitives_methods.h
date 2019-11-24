@@ -1,5 +1,6 @@
 void makeDefaultPPMImageGlobal() {
     imageGlobal = (PPMImage *)malloc(sizeof(PPMImage));
+    imageRotate = (PPMImage *)malloc(sizeof(PPMImage));
     ppmColor = (PPMColor *)malloc(sizeof(PPMColor));
     backgroundColor = (PPMColor *)malloc(sizeof(PPMColor));
 
@@ -83,19 +84,21 @@ void image(int x, int y) {
     imageGlobal->y = y;
 
     imageGlobal->matrizDePixels = (PPMPixel *)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
+    imageRotate->matrizDePixels = (PPMPixel *)malloc(imageGlobal->x * imageGlobal->y * sizeof(PPMPixel));
     clear(255, 255, 255);
 }
 
 void rotate (){
     printf("teste");
+    imageRotate->matrizDePixels = imageGlobal->matrizDePixels;
     imageRotate->x = imageGlobal->y;
     imageRotate->y = imageGlobal->x;
 
     int i = 0;
     int j = imageGlobal->x;
     int aux, count = 0;
-    for (int i; i < imageGlobal->y; i++){
-        for (int j; i > 0; j--){
+    for (i; i < imageGlobal->y; i++){
+        for (j; j > 0; j--){
             
             aux = i + ((j-1)*imageGlobal->y);
             printf("%i", aux);
@@ -107,7 +110,7 @@ void rotate (){
     }
     imageGlobal->x = imageRotate->x;
     imageGlobal->y = imageRotate->y;
-    for (int i = 0; i < imageGlobal->x * imageGlobal->y; i++){
+    for (i = 0; i < imageGlobal->x * imageGlobal->y; i++){
         imageGlobal->matrizDePixels[i].r = imageRotate->matrizDePixels[i].r;
         imageGlobal->matrizDePixels[i].g = imageRotate->matrizDePixels[i].g;
         imageGlobal->matrizDePixels[i].b = imageRotate->matrizDePixels[i].b; 
