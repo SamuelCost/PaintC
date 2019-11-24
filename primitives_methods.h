@@ -236,3 +236,41 @@ void polygon(char **arguments){
     p4 -= 2;
     line(atoi(arguments[p3]), atoi(arguments[p4]), atoi(arguments[p1]), atoi(arguments[p2]));
 }
+
+void mirror(char *orientation) {
+    int halfHorizontal = (int) imageGlobal->x / 2;
+
+    if ((strcmp(orientation, "horizontal") == 0)) {
+        int xDesc;
+        int x;
+        for (int y = 0; y < imageGlobal->y; y++){
+            for(x = 0, xDesc = imageGlobal->x - 1; x < imageGlobal->x && xDesc >= 0; x++, xDesc--){
+                int oldPixelPosition = (y * imageGlobal->y) - xDesc;
+                int newPixelPosition = (y * imageGlobal->y) - x;
+
+                imageGlobal->matrizDePixels[oldPixelPosition] = imageGlobal->matrizDePixels[newPixelPosition];
+            }
+        }
+    }
+
+    if ((strcmp(orientation, "vertical") == 0)) {
+        int yDesc;
+        int y;
+        for (int x = 0; x < imageGlobal->x; x++){
+            for(y = 0, yDesc = imageGlobal->y - 1; y < imageGlobal->y && yDesc >= 0; y++, yDesc--){
+                int oldPixelPosition = (yDesc * imageGlobal->y) - x;
+                int newPixelPosition = (y * imageGlobal->y) - x;
+
+                imageGlobal->matrizDePixels[oldPixelPosition] = imageGlobal->matrizDePixels[newPixelPosition];
+            }
+        }
+    }
+}
+
+void negative() {
+    for (int i = 0; i < imageGlobal->x * imageGlobal->y; i++){
+        imageGlobal->matrizDePixels[i].r = abs(255 - imageGlobal->matrizDePixels[i].r);
+        imageGlobal->matrizDePixels[i].g = abs(255 - imageGlobal->matrizDePixels[i].g);
+        imageGlobal->matrizDePixels[i].b = abs(255 - imageGlobal->matrizDePixels[i].b);
+    }
+}
