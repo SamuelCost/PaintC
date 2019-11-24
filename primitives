@@ -1,10 +1,15 @@
 open image.ppm
 image 200 200
 fill 99 99
+color 255 0 0
 polygon 4 25 25 25 75 75 75 75 25
 circle 10 50 5
 circle 50 10 5
 rotate sad
 flip vertical
+move right 10
+move left 10
+move top 10
+move bottom 10
 save ppm2.ppm
 comand

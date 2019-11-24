@@ -27,6 +27,10 @@ color 255 0 0
 fill 0 0
 flip vertical
 flip horizontal
+move right 10
+move left 10
+move top 10
+move bottom 10
 save test.ppm
 ```
 
@@ -86,4 +90,12 @@ color 100 170 200
 ```
 flip vertical
 flip horizontal
+```
+
+### Move a imagem em uma quantidade de pixels para direita, esquerda, cima ou baixo
+```
+move right 10
+move left 10
+move top 10
+move bottom 10
 ```

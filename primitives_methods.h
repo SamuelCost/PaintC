@@ -300,10 +300,81 @@ void flip(char *orientation) {
             for(int x = 0; x < imageGlobal->x; x++){
                 int topPixelPosition = abs(((imageGlobal->y - y -1) * imageGlobal->y) - x);
                 int bottomPixelPosition = abs((y * imageGlobal->y) - x);
-                
+
                 PPMPixel pixel = imageGlobal->matrizDePixels[bottomPixelPosition];
                 imageGlobal->matrizDePixels[bottomPixelPosition] = imageGlobal->matrizDePixels[topPixelPosition];
                 imageGlobal->matrizDePixels[topPixelPosition] = pixel;
+            }
+        }
+    }
+}
+
+void move(char *orientation, int size) {
+    if ((strcmp(orientation, "right") == 0)) {
+        for (int y = 0; y < imageGlobal->y; y++){
+            for(int x = imageGlobal->x -1; x > 0; x--){
+                int pixelPosition = abs((y * imageGlobal->y) - x);
+                if(x >= size) {
+                    int oldPixelPosition = abs((y * imageGlobal->y) - (x - size));
+                    PPMPixel pixel = imageGlobal->matrizDePixels[oldPixelPosition];
+                    imageGlobal->matrizDePixels[oldPixelPosition] = imageGlobal->matrizDePixels[pixelPosition];
+                    imageGlobal->matrizDePixels[pixelPosition] = pixel;
+                } else {
+                    imageGlobal->matrizDePixels[pixelPosition].r = ppmColor->r;
+                    imageGlobal->matrizDePixels[pixelPosition].g = ppmColor->g;
+                    imageGlobal->matrizDePixels[pixelPosition].b = ppmColor->b;
+                }
+            }
+        }
+    }
+    if ((strcmp(orientation, "left") == 0)) {
+        for (int y = 0; y < imageGlobal->y; y++){
+            for(int x = 0; x < imageGlobal->x; x++){
+                int pixelPosition = abs((y * imageGlobal->y) - x);
+                if(x >= size) {
+                    int oldPixelPosition = abs((y * imageGlobal->y) - (x - size));
+                    PPMPixel pixel = imageGlobal->matrizDePixels[oldPixelPosition];
+                    imageGlobal->matrizDePixels[oldPixelPosition] = imageGlobal->matrizDePixels[pixelPosition];
+                    imageGlobal->matrizDePixels[pixelPosition] = pixel;
+                } else {
+                    imageGlobal->matrizDePixels[pixelPosition].r = ppmColor->r;
+                    imageGlobal->matrizDePixels[pixelPosition].g = ppmColor->g;
+                    imageGlobal->matrizDePixels[pixelPosition].b = ppmColor->b;
+                }
+            }
+        }
+    }
+    if ((strcmp(orientation, "bottom") == 0)) {
+        for (int y = imageGlobal->y -1; y > 0; y--){
+            for(int x = 0; x < imageGlobal->x; x++){
+                int pixelPosition = abs((y * imageGlobal->y) - x);
+                if(y >= size) {
+                    int oldPixelPosition = abs(((y -size) * imageGlobal->y) - x);
+                    PPMPixel pixel = imageGlobal->matrizDePixels[oldPixelPosition];
+                    imageGlobal->matrizDePixels[oldPixelPosition] = imageGlobal->matrizDePixels[pixelPosition];
+                    imageGlobal->matrizDePixels[pixelPosition] = pixel;
+                } else {
+                    imageGlobal->matrizDePixels[pixelPosition].r = ppmColor->r;
+                    imageGlobal->matrizDePixels[pixelPosition].g = ppmColor->g;
+                    imageGlobal->matrizDePixels[pixelPosition].b = ppmColor->b;
+                }
+            }
+        }
+    }
+    if ((strcmp(orientation, "top") == 0)) {
+        for (int y = 0; y < imageGlobal->y; y++){
+            for(int x = 0; x < imageGlobal->x; x++){
+                int pixelPosition = abs((y * imageGlobal->y) - x);
+                if(y >= size) {
+                    int oldPixelPosition = abs(((y -size) * imageGlobal->y) - x);
+                    PPMPixel pixel = imageGlobal->matrizDePixels[oldPixelPosition];
+                    imageGlobal->matrizDePixels[oldPixelPosition] = imageGlobal->matrizDePixels[pixelPosition];
+                    imageGlobal->matrizDePixels[pixelPosition] = pixel;
+                } else {
+                    imageGlobal->matrizDePixels[pixelPosition].r = ppmColor->r;
+                    imageGlobal->matrizDePixels[pixelPosition].g = ppmColor->g;
+                    imageGlobal->matrizDePixels[pixelPosition].b = ppmColor->b;
+                }
             }
         }
     }

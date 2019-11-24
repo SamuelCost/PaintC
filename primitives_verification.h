@@ -35,6 +35,9 @@ void checkPrimitive(char *name, char *arguments[100]){
     if (strcmp(name, "rotate") == 0){
         rotate();
     }
+    if (strcmp(name, "move") == 0){
+        move(arguments[0], atoi(arguments[1]));
+    }
 }
 
 void extractArgumentsPrimitive(char *primitiveLine) {
