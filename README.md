@@ -99,3 +99,25 @@ move left 10
 move top 10
 move bottom 10
 ```
+
+## Contribuidores ✨
+
+
+<table>
+  <tr>
+    <td align="center">
+        <a href="https://github.com/SamuelCost">
+            <img src="https://avatars1.githubusercontent.com/u/12562944?s=460&v=4" width="100px;" alt="SamuelCost"/>
+            <br />
+            <sub><b>Samuel Costa (SamuelCost)</b></sub>
+        </a>
+    </td>
+    <td align="center">
+        <a href="https://github.com/durvaal">
+            <img src="https://avatars1.githubusercontent.com/u/10746843?s=460&v=4" width="100px;" alt="Durvaal"/>
+            <br />
+            <sub><b>Paulo Lima (Durvaal)</b></sub>
+        </a>
+    </td>
+  </tr>
+</table>
