@@ -29,6 +29,9 @@ void checkPrimitive(char *name, char *arguments[100]){
     if (strcmp(name, "open") == 0){
         open(arguments[0]);
     }
+    if (strcmp(name, "rotate") == 0){
+        rotate();
+    }
 }
 
 void extractArgumentsPrimitive(char *primitiveLine) {
@@ -43,7 +46,6 @@ void extractArgumentsPrimitive(char *primitiveLine) {
         primitiveArguments[i] = removeBreakLine(primitiveArgument);
 		primitiveArgument = strtok(NULL, delimiter);
 	}
-
     checkPrimitive(primitiveName, primitiveArguments);
 }
 

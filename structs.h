@@ -19,3 +19,4 @@ typedef struct {
 PPMImage *imageGlobal;
 PPMColor *ppmColor;
 PPMColor *backgroundColor;
+PPMImage *imageRotate;
