@@ -165,6 +165,7 @@ void open(char *fileName) {
 
 int drawPixelPPM(int x, int y) {
     int pixelPosition = (y * imageGlobal->y) - x;
+    printf("\n %d", pixelPosition);
     imageGlobal->matrizDePixels[pixelPosition].r = ppmColor->r;
     imageGlobal->matrizDePixels[pixelPosition].g = ppmColor->g;
     imageGlobal->matrizDePixels[pixelPosition].b = ppmColor->b;
@@ -237,40 +238,30 @@ void polygon(char **arguments){
     line(atoi(arguments[p3]), atoi(arguments[p4]), atoi(arguments[p1]), atoi(arguments[p2]));
 }
 
-void mirror(char *orientation) {
-    int halfHorizontal = (int) imageGlobal->x / 2;
-
+void flip(char *orientation) {
     if ((strcmp(orientation, "horizontal") == 0)) {
-        int xDesc;
-        int x;
+        int halfHorizontal = (int) imageGlobal->x / 2;
         for (int y = 0; y < imageGlobal->y; y++){
-            for(x = 0, xDesc = imageGlobal->x - 1; x < imageGlobal->x && xDesc >= 0; x++, xDesc--){
-                int oldPixelPosition = (y * imageGlobal->y) - xDesc;
-                int newPixelPosition = (y * imageGlobal->y) - x;
-
-                imageGlobal->matrizDePixels[oldPixelPosition] = imageGlobal->matrizDePixels[newPixelPosition];
+            for(int x = 0; x < halfHorizontal; x++){
+                int rightPixelPosition = abs((y * imageGlobal->y) - (imageGlobal->x - x -1));
+                int leftPixelPosition = abs((y * imageGlobal->y) - x);
+                PPMPixel pixel = imageGlobal->matrizDePixels[leftPixelPosition];
+                imageGlobal->matrizDePixels[leftPixelPosition] = imageGlobal->matrizDePixels[rightPixelPosition];
+                imageGlobal->matrizDePixels[rightPixelPosition] = pixel;
             }
         }
     }
 
     if ((strcmp(orientation, "vertical") == 0)) {
-        int yDesc;
-        int y;
-        for (int x = 0; x < imageGlobal->x; x++){
-            for(y = 0, yDesc = imageGlobal->y - 1; y < imageGlobal->y && yDesc >= 0; y++, yDesc--){
-                int oldPixelPosition = (yDesc * imageGlobal->y) - x;
-                int newPixelPosition = (y * imageGlobal->y) - x;
-
-                imageGlobal->matrizDePixels[oldPixelPosition] = imageGlobal->matrizDePixels[newPixelPosition];
+        int halfVertical = (int) imageGlobal->y / 2;
+        for (int y = 0; y < halfVertical; y++){
+            for(int x = 0; x < imageGlobal->x; x++){
+                int topPixelPosition = abs(((imageGlobal->y - y -1) * imageGlobal->y) - x);
+                int bottomPixelPosition = abs((y * imageGlobal->y) - x);
+                PPMPixel pixel = imageGlobal->matrizDePixels[bottomPixelPosition];
+                imageGlobal->matrizDePixels[bottomPixelPosition] = imageGlobal->matrizDePixels[topPixelPosition];
+                imageGlobal->matrizDePixels[topPixelPosition] = pixel;
             }
         }
-    }
-}
-
-void negative() {
-    for (int i = 0; i < imageGlobal->x * imageGlobal->y; i++){
-        imageGlobal->matrizDePixels[i].r = abs(255 - imageGlobal->matrizDePixels[i].r);
-        imageGlobal->matrizDePixels[i].g = abs(255 - imageGlobal->matrizDePixels[i].g);
-        imageGlobal->matrizDePixels[i].b = abs(255 - imageGlobal->matrizDePixels[i].b);
     }
 }

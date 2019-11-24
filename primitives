@@ -4,8 +4,6 @@ fill 99 99
 polygon 4 25 25 25 75 75 75 75 25
 circle 10 50 5
 circle 50 10 5
-mirror horizontal
-mirror vertical
-negative active
+flip vertical
 save ppm2.ppm
 comand

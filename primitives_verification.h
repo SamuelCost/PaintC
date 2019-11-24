@@ -29,12 +29,8 @@ void checkPrimitive(char *name, char *arguments[100]){
     if (strcmp(name, "open") == 0){
         open(arguments[0]);
     }
-    if (strcmp(name, "mirror") == 0) {
-        mirror(arguments[0]);
-    }
-    if (strcmp(name, "negative") == 0) {    printf("\n sdfsdf");
-
-        negative();
+    if (strcmp(name, "flip") == 0) {
+        flip(arguments[0]);
     }
 }
 
@@ -50,7 +46,7 @@ void extractArgumentsPrimitive(char *primitiveLine) {
         primitiveArguments[i] = removeBreakLine(primitiveArgument);
 		primitiveArgument = strtok(NULL, delimiter);
 	}
-    printf("\n%s %s", primitiveName, primitiveArguments[0]);
+
     checkPrimitive(primitiveName, primitiveArguments);
 }
 

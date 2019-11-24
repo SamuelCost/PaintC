@@ -25,6 +25,8 @@ color 180 30 50
 fill 300 300
 color 255 0 0
 fill 0 0
+flip vertical
+flip horizontal
 save test.ppm
 ```
 
@@ -78,4 +80,10 @@ clear 0 0 0
 ### Muda a cor atual para uma cor especificada
 ```
 color 100 170 200
+```
+
+### Vira a imagem na vertical ou na horizontal
+```
+flip vertical
+flip horizontal
 ```
