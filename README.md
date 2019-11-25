@@ -114,6 +114,11 @@ move bottom 10
 rotate 90
 ```
 
+### Pintar o poligono ou o background - WIP
+```
+fill 50 50
+```
+
 ## Contribuidores ✨
 
 <table>

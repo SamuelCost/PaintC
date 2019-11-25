@@ -47,7 +47,7 @@ void checkPrimitive(char *name, char *arguments[100]) {
         flip(arguments[0]);
     }
     if (strcmp(name, "rotate") == 0){
-        rotate();
+        rotate(atoi(arguments[0]));
     }
     if (strcmp(name, "move") == 0){
         move(arguments[0], atoi(arguments[1]));
