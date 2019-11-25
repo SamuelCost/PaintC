@@ -104,6 +104,12 @@ move top 10
 move bottom 10
 ```
 
+### Rotacionar a imagem em um angulo de 90 graus
+```
+
+rotate 90
+```
+
 ## Contribuidores ✨
 
 

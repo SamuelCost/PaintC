@@ -87,24 +87,22 @@ void image(int x, int y) {
 }
 
 void rotate (){
-    printf("teste");
-    imageRotate->matrizDePixels = imageGlobal->matrizDePixels;
     imageRotate->x = imageGlobal->y;
     imageRotate->y = imageGlobal->x;
 
     int i = 0;
-    int j = imageGlobal->x;
     int aux, count = 0;
     for (i; i < imageGlobal->y; i++){
-        for (j; j > 0; j--){
-            
+        for (int j = imageGlobal->x; j > 0; j--){
+
             aux = i + ((j-1)*imageGlobal->y);
-            printf("%i", aux);
+            printf("%i ", aux);
             imageRotate->matrizDePixels[count].r = imageGlobal->matrizDePixels[aux].r;
             imageRotate->matrizDePixels[count].g = imageGlobal->matrizDePixels[aux].g;
             imageRotate->matrizDePixels[count].b = imageGlobal->matrizDePixels[aux].b;
-            count += 1;
+            count = count + 1;
         }
+        printf("\n");
     }
     imageGlobal->x = imageRotate->x;
     imageGlobal->y = imageRotate->y;
@@ -113,7 +111,6 @@ void rotate (){
         imageGlobal->matrizDePixels[i].g = imageRotate->matrizDePixels[i].g;
         imageGlobal->matrizDePixels[i].b = imageRotate->matrizDePixels[i].b; 
     }
-
 }
 
 /* 1  2  3  4  5     posiçãoRotação = i + ((j-1) * (y));
