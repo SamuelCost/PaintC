@@ -80,6 +80,11 @@ line 0 400 600 200
 circle 200 100 50
 ```
 
+### Desenha um polígono delimitado por uma lista de pontos
+```
+polygon 3 0 400 300 200 600 400
+```
+
 ### Limpa a imagem, setando todos os pixels para a cor especificada
 ```
 clear 0 0 0
@@ -110,7 +115,6 @@ rotate 90
 ```
 
 ## Contribuidores ✨
-
 
 <table>
   <tr>

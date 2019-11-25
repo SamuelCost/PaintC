@@ -315,6 +315,10 @@ void cicle(int xc, int yc, int r) {
     } 
 } 
 
+/**
+* Função que Desenha um polígono delimitado por uma lista de pontos
+* @param arguments Lista de coordenadas
+*/
 void polygon(char **arguments){
     int p1 = 1, p2 = 2, p3 = 3, p4 = 4;
     int sides = atoi(arguments[0]);
