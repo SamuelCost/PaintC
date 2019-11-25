@@ -26,8 +26,7 @@ void {\bfseries fill} (int x, int y)
 \item 
 void \hyperlink{primitives_8c_a4cb2947c89070dc7fae4d37f99c793ac}{image} (int x, int y)
 \item 
-\mbox{\Hypertarget{primitives_8c_a15a76598a144447da51866d50bf65d58}\label{primitives_8c_a15a76598a144447da51866d50bf65d58}} 
-void {\bfseries rotate} ()
+void \hyperlink{primitives_8c_add57089e07cd00dd309e4a246e2e98f1}{rotate} (int degrees)
 \item 
 void \hyperlink{primitives_8c_a1cc1b4218bcb85de60b4d1079b6c135b}{save} (char $\ast$file\+Name)
 \item 
@@ -220,7 +219,18 @@ Função auxilixar que remove a quebra de linha no final de um texto
 \begin{DoxyReturn}{Returns}
 Texto sem a quebra de linha no final 
 \end{DoxyReturn}
-\mbox{\Hypertarget{primitives_8c_a1cc1b4218bcb85de60b4d1079b6c135b}\label{primitives_8c_a1cc1b4218bcb85de60b4d1079b6c135b}} 
+\mbox{\Hypertarget{primitives_8c_add57089e07cd00dd309e4a246e2e98f1}\label{primitives_8c_add57089e07cd00dd309e4a246e2e98f1}} 
+\index{primitives.\+c@{primitives.\+c}!rotate@{rotate}}
+\index{rotate@{rotate}!primitives.\+c@{primitives.\+c}}
+\subsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily void rotate (\begin{DoxyParamCaption}\item[{int}]{degrees }\end{DoxyParamCaption})}
+
+Função que rotaciona a imagem em angulos de 90° no sentido horário. 
+\begin{DoxyParams}{Parameters}
+{\em degrees} & Angulo a ser rotacionado\\
+\hline
+\end{DoxyParams}
+A função além de redefinir o valor da largura como sendo a nova altura, e o valor da altura como sendo a nova largura, redefine também o posicionamento de linhas, que passaram a ser as novas colunas, e colunas, que passarão a ser as novas linhas. \mbox{\Hypertarget{primitives_8c_a1cc1b4218bcb85de60b4d1079b6c135b}\label{primitives_8c_a1cc1b4218bcb85de60b4d1079b6c135b}} 
 \index{primitives.\+c@{primitives.\+c}!save@{save}}
 \index{save@{save}!primitives.\+c@{primitives.\+c}}
 \subsubsection{\texorpdfstring{save()}{save()}}
