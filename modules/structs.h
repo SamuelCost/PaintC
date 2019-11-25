@@ -1,27 +1,49 @@
+/**
+ * @file structs.h
+ * @brief Contém as definições das structs
+*/
+
 #ifndef structs
 #define structs
 
-// struct dos pixels em RGB;
+/**
+ * Define a estrutura de RGB;
+ */
 typedef struct{
 	unsigned int r, g, b;
 } PPMPixel;
 
-// struct da image PPM contendo a struct de pixels em RGB;
+/**
+ * Define estrutura da imagem em formato PPM
+ */ 
 typedef struct {
      int x, y, maxRGBRange;
      char *fileName, *typeEncoding;
      PPMPixel *matrizDePixels;
 } PPMImage;
 
-// struct que define a cor do pincel atual
+/**
+ * Define a estrutura da cor (color)
+ */
 typedef struct {
     int r, g, b;
 } PPMColor;
 
-// struct do objeto PPM manipulado em tempo de execução
+/**
+ * Inicializa uma variável global da imagem PPM
+ */
 PPMImage *imageGlobal;
+/**
+ * Inicializa uma variável global para auxilicar a primitiva color
+ */
 PPMColor *ppmColor;
+/**
+ * Inicializa uma varável global para auxilicar a primitiva clear
+ */
 PPMColor *backgroundColor;
+/**
+ * Inicializa uma variável global da imagem PPM para a auxiliar a primitiva rotate
+ */
 PPMImage *imageRotate;
 
 #endif

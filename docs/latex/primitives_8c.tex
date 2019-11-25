@@ -1,0 +1,83 @@
+\hypertarget{primitives_8c}{}\section{modules/primitives.c File Reference}
+\label{primitives_8c}\index{modules/primitives.\+c@{modules/primitives.\+c}}
+
+
+Contém as implementações das primitivas.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}structs.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}primitives.\+h\char`\"{}}\newline
+Include dependency graph for primitives.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{primitives_8c_ab88e8fb839d5fd34d3a6ba001c0ec130}{remove\+Break\+Line} (char $\ast$text)
+\item 
+\mbox{\Hypertarget{primitives_8c_ad4cea4a9f1e1efb56038aee7d4d68e7c}\label{primitives_8c_ad4cea4a9f1e1efb56038aee7d4d68e7c}} 
+void {\bfseries color} (int r, int g, int b)
+\item 
+\mbox{\Hypertarget{primitives_8c_ad246187f246d62a20bcee0cfdefc28d7}\label{primitives_8c_ad246187f246d62a20bcee0cfdefc28d7}} 
+void {\bfseries clear} (int r, int g, int b)
+\item 
+\mbox{\Hypertarget{primitives_8c_a340b12e3c5c65176dfa614dc18faa89e}\label{primitives_8c_a340b12e3c5c65176dfa614dc18faa89e}} 
+void {\bfseries fill} (int x, int y)
+\item 
+\mbox{\Hypertarget{primitives_8c_a4cb2947c89070dc7fae4d37f99c793ac}\label{primitives_8c_a4cb2947c89070dc7fae4d37f99c793ac}} 
+void {\bfseries image} (int x, int y)
+\item 
+\mbox{\Hypertarget{primitives_8c_a15a76598a144447da51866d50bf65d58}\label{primitives_8c_a15a76598a144447da51866d50bf65d58}} 
+void {\bfseries rotate} ()
+\item 
+\mbox{\Hypertarget{primitives_8c_a1cc1b4218bcb85de60b4d1079b6c135b}\label{primitives_8c_a1cc1b4218bcb85de60b4d1079b6c135b}} 
+void {\bfseries save} (char $\ast$file\+Name)
+\item 
+\mbox{\Hypertarget{primitives_8c_a32c267fc61405d9e4795bcaf1a375e54}\label{primitives_8c_a32c267fc61405d9e4795bcaf1a375e54}} 
+void {\bfseries open} (char $\ast$file\+Name)
+\item 
+\mbox{\Hypertarget{primitives_8c_ab53f4229ac370622a80e1b8a86b5a508}\label{primitives_8c_ab53f4229ac370622a80e1b8a86b5a508}} 
+int {\bfseries draw\+Pixel\+P\+PM} (int x, int y)
+\item 
+\mbox{\Hypertarget{primitives_8c_a22de909bf6f8aad73f1126de7b5c8739}\label{primitives_8c_a22de909bf6f8aad73f1126de7b5c8739}} 
+void {\bfseries line} (int x0, int y0, int x1, int y1)
+\item 
+\mbox{\Hypertarget{primitives_8c_a2eb00ffc09265997f236932d7965ad9e}\label{primitives_8c_a2eb00ffc09265997f236932d7965ad9e}} 
+void {\bfseries draw\+Circle} (int xc, int yc, int x, int y)
+\item 
+\mbox{\Hypertarget{primitives_8c_aff5a21fbf20c091c058845a7dbe0e341}\label{primitives_8c_aff5a21fbf20c091c058845a7dbe0e341}} 
+void {\bfseries cicle} (int xc, int yc, int r)
+\item 
+\mbox{\Hypertarget{primitives_8c_aed3ffc2b8d730fb9dfda14a3f4a00ec0}\label{primitives_8c_aed3ffc2b8d730fb9dfda14a3f4a00ec0}} 
+void {\bfseries polygon} (char $\ast$$\ast$arguments)
+\item 
+\mbox{\Hypertarget{primitives_8c_a086e643b8063cb3bf3450ef966dcd3eb}\label{primitives_8c_a086e643b8063cb3bf3450ef966dcd3eb}} 
+void {\bfseries flip} (char $\ast$orientation)
+\item 
+\mbox{\Hypertarget{primitives_8c_ae898cdf94416af68fc3bc9a7c5d8e088}\label{primitives_8c_ae898cdf94416af68fc3bc9a7c5d8e088}} 
+void {\bfseries move} (char $\ast$orientation, int size)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contém as implementações das primitivas. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{primitives_8c_ab88e8fb839d5fd34d3a6ba001c0ec130}\label{primitives_8c_ab88e8fb839d5fd34d3a6ba001c0ec130}} 
+\index{primitives.\+c@{primitives.\+c}!remove\+Break\+Line@{remove\+Break\+Line}}
+\index{remove\+Break\+Line@{remove\+Break\+Line}!primitives.\+c@{primitives.\+c}}
+\subsubsection{\texorpdfstring{remove\+Break\+Line()}{removeBreakLine()}}
+{\footnotesize\ttfamily char$\ast$ remove\+Break\+Line (\begin{DoxyParamCaption}\item[{char $\ast$}]{text }\end{DoxyParamCaption})}
+
+Função auxilixar que remove a quebra de linha no final de um texto 
+\begin{DoxyParams}{Parameters}
+{\em text} & Texto com quebra de linha final \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Texto sem a quebra de linha no final 
+\end{DoxyReturn}

@@ -1,3 +1,8 @@
+/**
+ * @file primitives.c
+ * @brief Contém as implementações das primitivas
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,12 +10,17 @@
 #include "structs.h"
 #include "primitives.h"
 
-char *removeBreakLine(char *string){
-    unsigned int sizeLine = strlen(string) - 1;
-    if (*string && string[sizeLine] == '\n') {
-        string[sizeLine] = '\0';
+/**
+* Função auxilixar que remove a quebra de linha no final de um texto
+* @param text Texto com quebra de linha final
+* @return Texto sem a quebra de linha no final
+*/
+char *removeBreakLine(char *text){
+    unsigned int sizeLine = strlen(text) - 1;
+    if (*text && text[sizeLine] == '\n') {
+        text[sizeLine] = '\0';
     }
-    return string;
+    return text;
 }
 
 void color(int r, int g, int b) {

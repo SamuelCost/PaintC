@@ -1,3 +1,9 @@
+/**
+ * @file primitives.h
+ * @brief Contém as assinaturas das primitivas
+*/
+
+
 #ifndef primitives
 #define primitives
 

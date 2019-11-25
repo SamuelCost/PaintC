@@ -1,0 +1,31 @@
+\hypertarget{main_8c}{}\section{main.\+c File Reference}
+\label{main_8c}\index{main.\+c@{main.\+c}}
+
+
+Arquivo principal de execução.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}./modules/auxiliary.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}./modules/verification.\+h\char`\"{}}\newline
+Include dependency graph for main.\+c\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+int {\bfseries main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Arquivo principal de execução. 
+
+\begin{DoxyWarning}{Warning}
+Leia o R\+E\+A\+D\+ME caso ainda saiba como compilar corretamente. 
+\end{DoxyWarning}
+\begin{DoxyCopyright}{Copyright}
+PaintC -\/ Samuel Costa e Paulo Lima 
+\end{DoxyCopyright}

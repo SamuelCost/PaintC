@@ -1,8 +1,17 @@
+/**
+ * @file auxiliary.c
+ * @brief Contém as implementações dos métodos auxiliares
+*/
+
 #include <stdlib.h>
 
 #include "structs.h"
+#include "auxiliary.h"
 
-void makeDefaultPPMImageGlobal() {
+/**
+* Aloca e cria valores padrões para as structs, auxiliando quando esses valores não são informados através do arquivo de primitivas
+*/
+void makeDefaultStructs() {
     imageGlobal = (PPMImage *)malloc(sizeof(PPMImage));
     imageRotate = (PPMImage *)malloc(sizeof(PPMImage));
     ppmColor = (PPMColor *)malloc(sizeof(PPMColor));

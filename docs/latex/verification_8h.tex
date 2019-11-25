@@ -1,0 +1,57 @@
+\hypertarget{verification_8h}{}\section{modules/verification.h File Reference}
+\label{verification_8h}\index{modules/verification.\+h@{modules/verification.\+h}}
+
+
+Contém as assinaturas das verificações das primitivas.  
+
+
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{verification_8h_ac231093cd60b8e7face853933f7727fb}{check\+Primitive} (char $\ast$name, char $\ast$arguments\mbox{[}100\mbox{]})
+\item 
+void \hyperlink{verification_8h_af65c3c3ffca76554d93c010efff1ae5c}{extract\+Arguments\+Primitive} (char $\ast$primitive\+Line)
+\item 
+void \hyperlink{verification_8h_a2a871f9dc98b90c7e71188f974e2eb8d}{read\+Primites\+File} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contém as assinaturas das verificações das primitivas. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{verification_8h_ac231093cd60b8e7face853933f7727fb}\label{verification_8h_ac231093cd60b8e7face853933f7727fb}} 
+\index{verification.\+h@{verification.\+h}!check\+Primitive@{check\+Primitive}}
+\index{check\+Primitive@{check\+Primitive}!verification.\+h@{verification.\+h}}
+\subsubsection{\texorpdfstring{check\+Primitive()}{checkPrimitive()}}
+{\footnotesize\ttfamily void check\+Primitive (\begin{DoxyParamCaption}\item[{char $\ast$}]{name,  }\item[{char $\ast$}]{arguments\mbox{[}100\mbox{]} }\end{DoxyParamCaption})}
+
+Checa se o nome da primitiva existe e chama as respectivas funções passando os respectivos argumentos 
+\begin{DoxyParams}{Parameters}
+{\em name} & Nome da primitiva \\
+\hline
+{\em arguments} & Argumentos da primitiva \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{verification_8h_af65c3c3ffca76554d93c010efff1ae5c}\label{verification_8h_af65c3c3ffca76554d93c010efff1ae5c}} 
+\index{verification.\+h@{verification.\+h}!extract\+Arguments\+Primitive@{extract\+Arguments\+Primitive}}
+\index{extract\+Arguments\+Primitive@{extract\+Arguments\+Primitive}!verification.\+h@{verification.\+h}}
+\subsubsection{\texorpdfstring{extract\+Arguments\+Primitive()}{extractArgumentsPrimitive()}}
+{\footnotesize\ttfamily void extract\+Arguments\+Primitive (\begin{DoxyParamCaption}\item[{char $\ast$}]{primitive\+Line }\end{DoxyParamCaption})}
+
+Extrai os argumentos da primitiva através da linha lida através da função read\+Primites\+File 
+\begin{DoxyParams}{Parameters}
+{\em primitive\+Line} & Linha recebida pela função read\+Primites\+File, que contém os argumentos da primitiva separados por espaço \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{verification_8h_a2a871f9dc98b90c7e71188f974e2eb8d}\label{verification_8h_a2a871f9dc98b90c7e71188f974e2eb8d}} 
+\index{verification.\+h@{verification.\+h}!read\+Primites\+File@{read\+Primites\+File}}
+\index{read\+Primites\+File@{read\+Primites\+File}!verification.\+h@{verification.\+h}}
+\subsubsection{\texorpdfstring{read\+Primites\+File()}{readPrimitesFile()}}
+{\footnotesize\ttfamily void read\+Primites\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Ler o arquivo de primitivas, e chama a função extract\+Arguments\+Primitive para extrair as primitivas encontradas 

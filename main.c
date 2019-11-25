@@ -1,3 +1,11 @@
+/**
+ * @file main.c
+ * @brief Arquivo principal de execução
+ *
+ * @warning Leia o README caso ainda saiba como compilar corretamente.
+ * @copyright PaintC - Samuel Costa e Paulo Lima
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,6 +14,6 @@
 #include "./modules/verification.h"
 
 int main(){
-    makeDefaultPPMImageGlobal();
+    makeDefaultStructs();
     readPrimitesFile();
 }

@@ -1,3 +1,8 @@
+/**
+ * @file verification.h
+ * @brief Contém as assinaturas das verificações das primitivas
+*/
+
 #ifndef primitives
 #define primitives
 
