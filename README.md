@@ -37,7 +37,7 @@ save test.ppm
 ## Como compilar o programa
 
 ```
-gcc main.c -o main
+gcc ./modules/auxiliary.c ./modules/primitives.c ./modules/verification.c main.c -o main
 ```
 
 ## Como executar o programa

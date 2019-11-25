@@ -1,3 +1,6 @@
+#ifndef structs
+#define structs
+
 // struct dos pixels em RGB;
 typedef struct{
 	unsigned int r, g, b;
@@ -20,3 +23,5 @@ PPMImage *imageGlobal;
 PPMColor *ppmColor;
 PPMColor *backgroundColor;
 PPMImage *imageRotate;
+
+#endif

@@ -1,3 +1,10 @@
 {
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "stdio.h": "c",
+        "structs.h": "c",
+        "primitives_verification.h": "c",
+        "string.h": "c",
+        "verification.h": "c"
+    }
 }

@@ -1,21 +1,9 @@
-void makeDefaultPPMImageGlobal() {
-    imageGlobal = (PPMImage *)malloc(sizeof(PPMImage));
-    imageRotate = (PPMImage *)malloc(sizeof(PPMImage));
-    ppmColor = (PPMColor *)malloc(sizeof(PPMColor));
-    backgroundColor = (PPMColor *)malloc(sizeof(PPMColor));
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-    imageGlobal->x = 400;
-    imageGlobal->y = 200;
-    imageGlobal->maxRGBRange = 255;
-    imageGlobal->fileName = "image.ppm";
-    imageGlobal->typeEncoding = "P3";
-    ppmColor->r = 255;
-    ppmColor->g = 0;
-    ppmColor->b = 0;
-    backgroundColor->r = 255;
-    backgroundColor->g = 255;
-    backgroundColor->b = 255;
-}
+#include "structs.h"
+#include "primitives.h"
 
 char *removeBreakLine(char *string){
     unsigned int sizeLine = strlen(string) - 1;
@@ -239,6 +227,7 @@ void drawCircle(int xc, int yc, int x, int y) {
     drawPixelPPM(xc-y, yc-x); 
 } 
 
+// Reference: https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
 void cicle(int xc, int yc, int r) { 
     int x = 0, y = r; 
     int d = 3 - 2 * r; 

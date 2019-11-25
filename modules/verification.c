@@ -1,3 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "primitives.h"
+#include "verification.h"
+
 void checkPrimitive(char *name, char *arguments[100]){
     if (strcmp(name, "image") == 0){
         image(atoi(arguments[0]), atoi(arguments[1]));
