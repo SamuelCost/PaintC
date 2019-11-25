@@ -23,7 +23,7 @@ void save(char * fileName);
 
 void open(char *fileName);
 
-int drawPixelPPM(int x, int y);
+void drawPixelPPM(int x, int y);
 
 void line(int x0, int y0, int x1, int y1);
 

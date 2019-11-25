@@ -1,9 +1,11 @@
 open image.ppm
-image 200 200
-polygon 4 25 25 25 75 75 75 75 25
+image 100 100
+polygon 3 10 10 30 10 15 30
 circle 10 50 5
 circle 50 10 5
 rotate 90
 rotate 90
+rotate 90
+flip horizontal
 save ppm2.ppm
 comand

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['imageglobal',['imageGlobal',['../structs_8h.html#ab09a5a37de87fe93a55cb6726b1a4291',1,'structs.h']]],
-  ['imagerotate',['imageRotate',['../structs_8h.html#aa43e1adeab052d6292ac15a64955475b',1,'structs.h']]]
+  ['extractargumentsprimitive',['extractArgumentsPrimitive',['../verification_8c.html#af65c3c3ffca76554d93c010efff1ae5c',1,'extractArgumentsPrimitive(char *primitiveLine):&#160;verification.c'],['../verification_8h.html#af65c3c3ffca76554d93c010efff1ae5c',1,'extractArgumentsPrimitive(char *primitiveLine):&#160;verification.c']]]
 ];

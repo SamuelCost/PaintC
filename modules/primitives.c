@@ -23,12 +23,26 @@ char *removeBreakLine(char *text){
     return text;
 }
 
+/**
+* Função que muda a cor atual para uma cor especificada, recebendo novos valores em RGB
+* @param r Cor relacionada ao vermelho
+* @param g Cor relacionada ao verde
+* @param b Cor relacionada ao azul
+* @details As cores são armazenadas na struct global ppmColor do tipo PPMColor
+*/
 void color(int r, int g, int b) {
     ppmColor->r = r;
     ppmColor->g = g;
     ppmColor->b = b;
 }
 
+/**
+* Função que limpa a imagem, setando todos os pixels para a cor especificada, recebendo novos valores em RGB
+* @param r Cor relacionada ao vermelho
+* @param g Cor relacionada ao verde
+* @param b Cor relacionada ao azul
+* @details As cores são armazenadas na struct global backgroundColor do tipo PPMColor
+*/
 void clear(int r, int g, int b) {
     backgroundColor->r = r;
     backgroundColor->g = g;
@@ -77,6 +91,12 @@ void fill(int x, int y){
     }
 }
 
+/**
+* Função que criar uma nova “imagem”, com a largura e altura especificadas, recebendo as novos tamanhos de largura e altura
+* @param x Largura da imagem PPM
+* @param g Altura da imagem PPM
+* @details A função além de realocar o novo espaço na memória com base nos valores específicados, redimensiona a imagem e limpa o background para a cor branca
+*/
 void image(int x, int y) {
     imageGlobal->x = x;
     imageGlobal->y = y;
@@ -123,7 +143,12 @@ void rotate (){
 14 9  4
 15 10 5 */
 
-void save(char * fileName) {
+/**
+* Função que salvar a imagem atual em um arquivo usando o formato ppm, recebendo o nome do arquivo
+* @param fileName Nome do arquivo PPM
+* @details A função open ler os pixels na ordem inversa, por isso, salvamos na ordem inversa
+*/
+void save(char *fileName) {
     FILE *fn;
 
     fn = fopen(fileName, "w+");
@@ -141,6 +166,11 @@ void save(char * fileName) {
     fclose(fn);
 }
 
+/**
+* Função que abre uma imagem no formato ppm e carrega essa imagem no programa para futuras operações de desenho, recebendo o nome do arquivo
+* @param fileName Nome do arquivo PPM
+* @details A função open ler os pixels na ordem inversa, e seta na struct imageGlobal do tipo PPMImage as informações encontradas no PPM
+*/
 void open(char *fileName) {
     char line[100];
     int lineIndex = -1;
@@ -200,13 +230,27 @@ void open(char *fileName) {
     fclose(arq);
 }
 
-int drawPixelPPM(int x, int y) {
+/**
+* Função auxiliar que pinta o pixel com base em suas coordenada x, y
+* @param x Valor horizontal da coordenada
+* @param y Valor vertical da coordenada
+* @details Como salvamos e lemos os pixels em um array unidimensional, é necessário encontra o índice equivalente a coordenada x,y a partir da variável pixelPosition
+*/
+void drawPixelPPM(int x, int y) {
     int pixelPosition = (y * imageGlobal->y) - x;
     imageGlobal->matrizDePixels[pixelPosition].r = ppmColor->r;
     imageGlobal->matrizDePixels[pixelPosition].g = ppmColor->g;
     imageGlobal->matrizDePixels[pixelPosition].b = ppmColor->b;
 }
 
+/**
+* Função que específica os dois pontos das extremidades da linha a ser desenhada, cada um com suas coordenadas (x, y)
+* @param x0 Valor horizontal da primeira coordenada
+* @param y0 Valor vertical da primeira coordenada
+* @param x1 Valor horizontal da segunda coordenada
+* @param y1 Valor vertical da segunda coordenada
+* @details Foi utilizado como base o algoritmo de linha de Bresenham
+*/
 void line(int x0, int y0, int x1, int y1) {
     int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
     int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1; 
@@ -223,6 +267,13 @@ void line(int x0, int y0, int x1, int y1) {
     }
 }
 
+/**
+* Função auxiliar que pinta os pixels a partir das coordenadas especificadas
+* @param xc Valor horizontal da primeira coordenada
+* @param yc Valor vertical da primeira coordenada
+* @param x Valor horizontal da segunda coordenada
+* @param y Valor vertical da segunda coordenada
+*/
 void drawCircle(int xc, int yc, int x, int y) { 
     drawPixelPPM(xc+x, yc+y); 
     drawPixelPPM(xc-x, yc+y); 
@@ -234,7 +285,13 @@ void drawCircle(int xc, int yc, int x, int y) {
     drawPixelPPM(xc-y, yc-x); 
 } 
 
-// Reference: https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
+/**
+* Função que desenha um círculo nas posições x, y e tamanho especificados
+* @param xc Valor horizontal da coordenada
+* @param yc Valor vertical da coordenada
+* @param r Valor do raio do círculo
+* @details Foi utilizado como base o algoritmo de Bresenham, https://www.geeksforgeeks.org/bresenhams-circle-drawing-algorithm/
+*/
 void cicle(int xc, int yc, int r) { 
     int x = 0, y = r; 
     int d = 3 - 2 * r; 
@@ -250,9 +307,9 @@ void cicle(int xc, int yc, int r) {
         // update d, x, y 
         if (d > 0) { 
             y--;  
-            d = d + 4 * (x - y) + 10; 
+            d = d + 4 * (x - y); 
         } else {
-            d = d + 4 * x + 6; 
+            d = d + 4 * x; 
         }
         drawCircle(xc, yc, x, y); 
     } 
@@ -275,6 +332,10 @@ void polygon(char **arguments){
     line(atoi(arguments[p3]), atoi(arguments[p4]), atoi(arguments[p1]), atoi(arguments[p2]));
 }
 
+/**
+* Função que vira a imagem na vertical ou na horizontal
+* @param orientation Valor da orientação 'vertical' ou 'horizontal'
+*/
 void flip(char *orientation) {
     if ((strcmp(orientation, "horizontal") == 0)) {
         int halfHorizontal = (int) imageGlobal->x / 2;
@@ -305,6 +366,11 @@ void flip(char *orientation) {
     }
 }
 
+/**
+* Função que move a imagem em uma quantidade de pixels para direita, esquerda, cima ou baixo
+* @param orientation Valor da orientação 'right', 'left', 'top' ou 'bottom'
+* @param size Valor da quantidade de pixels a ser movida
+*/
 void move(char *orientation, int size) {
     if ((strcmp(orientation, "right") == 0)) {
         for (int y = 0; y < imageGlobal->y; y++){

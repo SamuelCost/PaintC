@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['paintc',['PaintC',['../md_README.html',1,'']]],
-  ['ppmcolor',['PPMColor',['../structPPMColor.html',1,'PPMColor'],['../structs_8h.html#a8f0d763739744041aeee27aa066e658f',1,'ppmColor():&#160;structs.h']]],
-  ['ppmimage',['PPMImage',['../structPPMImage.html',1,'']]],
-  ['ppmpixel',['PPMPixel',['../structPPMPixel.html',1,'']]],
-  ['primitives_2ec',['primitives.c',['../primitives_8c.html',1,'']]],
-  ['primitives_2eh',['primitives.h',['../primitives_8h.html',1,'']]]
+  ['image',['image',['../primitives_8c.html#a4cb2947c89070dc7fae4d37f99c793ac',1,'image(int x, int y):&#160;primitives.c'],['../primitives_8h.html#a4cb2947c89070dc7fae4d37f99c793ac',1,'image(int x, int y):&#160;primitives.c']]],
+  ['imageglobal',['imageGlobal',['../structs_8h.html#ab09a5a37de87fe93a55cb6726b1a4291',1,'structs.h']]],
+  ['imagerotate',['imageRotate',['../structs_8h.html#aa43e1adeab052d6292ac15a64955475b',1,'structs.h']]]
 ];
