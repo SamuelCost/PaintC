@@ -22,7 +22,7 @@ int \hyperlink{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
 \subsection{Detailed Description}
 Arquivo principal de execução. 
 
-Suporte apenas para os P\+PM no formato P3 \begin{DoxyWarning}{Warning}
+Suporte apenas para os arquivos P\+PM no formato P3 \begin{DoxyWarning}{Warning}
 Leia o R\+E\+A\+D\+ME caso ainda saiba como compilar corretamente. 
 \end{DoxyWarning}
 \begin{DoxyCopyright}{Copyright}
