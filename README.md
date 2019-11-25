@@ -1,5 +1,5 @@
 # PaintC
-Ferramenta de desenho gráfico em C
+Ferramenta de desenho gráfico em C. Com suporte apenas para os arquivos PPM no formato P3.
 
 ## Documentação
 
