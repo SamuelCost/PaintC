@@ -14,6 +14,12 @@
 #include "./modules/verification.h"
 
 int main(){
+    /**
+    * Constrói os valores padrões das primitivas
+    */
     makeDefaultStructs();
+    /**
+    * Ler o arquivo de primitivas
+    */
     readPrimitesFile();
 }
