@@ -3,7 +3,7 @@ Ferramenta de desenho gráfico em C
 
 ## Documentação
 
-O projeto possui uma documentação feita com o auxílio do [Doxygen](http://www.doxygen.nl/), e pode ser encontrada [aqui]("./docs/html"). Nela é possível enxergar detalhes sobre a implementação de cada parte do código.
+O projeto possui uma documentação feita com o auxílio do [Doxygen](http://www.doxygen.nl/), e pode ser encontrada [aqui](docs/html). Nela é possível enxergar detalhes sobre a implementação de cada parte do código.
 
 ## Tipos de dados utilizados
 
