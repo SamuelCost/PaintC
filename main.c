@@ -1,7 +1,7 @@
 /**
  * @file main.c
  * @brief Arquivo principal de execução
- *
+ * @details Suporte apenas para os PPM no formato P3
  * @warning Leia o README caso ainda saiba como compilar corretamente.
  * @copyright PaintC - Samuel Costa e Paulo Lima
 */
