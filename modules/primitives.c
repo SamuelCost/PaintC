@@ -56,88 +56,92 @@ void clear(int r, int g, int b) {
 
 
 void fill(int x, int y){
-    int count = 0;
-    int i = (y * imageGlobal->y) - x;
-    int newposition;
-    int position = (y * imageGlobal->y) - x;
-    while (count == 0){
-        if (backgroundColor->r == imageGlobal->matrizDePixels[i].r && backgroundColor->g == imageGlobal->matrizDePixels[i].g && backgroundColor->b == imageGlobal->matrizDePixels[i].b){
-                imageGlobal->matrizDePixels[i].r = 90;
-                imageGlobal->matrizDePixels[i].g = 172;
-                imageGlobal->matrizDePixels[i].b = 68;
-                i++; 
-        }else{
-            newposition = position - (imageGlobal->x);
-            i = newposition;
-            position = newposition;
-            if (newposition < 0){
-                count = 1;
+    int touchedBord = 0;
+    for (int i = y; i < imageGlobal->y; i++){
+        if (i == imageGlobal->y - 1) {
+            touchedBord = 1;
+        }
+        int pixelPosition = abs((i * imageGlobal->y) - x);
+        if (!(backgroundColor->r == imageGlobal->matrizDePixels[pixelPosition].r && backgroundColor->g == imageGlobal->matrizDePixels[pixelPosition].g && backgroundColor->b == imageGlobal->matrizDePixels[pixelPosition].b)){
+            break;
+        }
+        for (int j = x; j < imageGlobal->x; j++){
+            if (j == imageGlobal->x - 1) {
+                touchedBord = 1;
             }
-            if (backgroundColor->r != imageGlobal->matrizDePixels[i].r || backgroundColor->g != imageGlobal->matrizDePixels[i].g || backgroundColor->b != imageGlobal->matrizDePixels[i].b){
-                count = 1;
+            pixelPosition = abs((i * imageGlobal->y) - j);
+            if (backgroundColor->r == imageGlobal->matrizDePixels[pixelPosition].r && backgroundColor->g == imageGlobal->matrizDePixels[pixelPosition].g && backgroundColor->b == imageGlobal->matrizDePixels[pixelPosition].b){
+                imageGlobal->matrizDePixels[pixelPosition].r = 90;
+                imageGlobal->matrizDePixels[pixelPosition].g = 172;
+                imageGlobal->matrizDePixels[pixelPosition].b = 68;
+            }else{
+                break;
             }
         }
     }
-    count = 0;
-    i = ((y * imageGlobal->y) - x) - 1;
-    position = i;
-    while (count == 0){
-        if (backgroundColor->r == imageGlobal->matrizDePixels[i].r && backgroundColor->g == imageGlobal->matrizDePixels[i].g && backgroundColor->b == imageGlobal->matrizDePixels[i].b){
-                imageGlobal->matrizDePixels[i].r = 90;
-                imageGlobal->matrizDePixels[i].g = 172;
-                imageGlobal->matrizDePixels[i].b = 68;
-                i--; 
-        }else{
-            newposition = position - (imageGlobal->x);
-            i = newposition;
-            position = newposition;
-            if (newposition < 0){
-                count = 1;
+    for (int i = y; i < imageGlobal->y; i++){
+        if (i == imageGlobal->y - 1) {
+            touchedBord = 1;
+        }
+        int pixelPosition = abs((i * imageGlobal->y) - (x - 1));
+        if (!(backgroundColor->r == imageGlobal->matrizDePixels[pixelPosition].r && backgroundColor->g == imageGlobal->matrizDePixels[pixelPosition].g && backgroundColor->b == imageGlobal->matrizDePixels[pixelPosition].b)){
+            break;
+        }
+        for (int j = x - 1; j >= 0; j--){
+            if (j == imageGlobal->x - 1) {
+                touchedBord = 1;
             }
-            if (backgroundColor->r != imageGlobal->matrizDePixels[i].r || backgroundColor->g != imageGlobal->matrizDePixels[i].g || backgroundColor->b != imageGlobal->matrizDePixels[i].b){
-                count = 1;
+            pixelPosition = abs((i * imageGlobal->y) - j);
+            if (backgroundColor->r == imageGlobal->matrizDePixels[pixelPosition].r && backgroundColor->g == imageGlobal->matrizDePixels[pixelPosition].g && backgroundColor->b == imageGlobal->matrizDePixels[pixelPosition].b){
+                imageGlobal->matrizDePixels[pixelPosition].r = 90;
+                imageGlobal->matrizDePixels[pixelPosition].g = 172;
+                imageGlobal->matrizDePixels[pixelPosition].b = 68;
+            }else{
+                break;
             }
         }
     }
-    count = 0;
-    i = ((y * imageGlobal->y) - x) + imageGlobal->x;
-    position = i;
-    while (count == 0){
-        if (backgroundColor->r == imageGlobal->matrizDePixels[i].r && backgroundColor->g == imageGlobal->matrizDePixels[i].g && backgroundColor->b == imageGlobal->matrizDePixels[i].b){
-                imageGlobal->matrizDePixels[i].r = 90;
-                imageGlobal->matrizDePixels[i].g = 172;
-                imageGlobal->matrizDePixels[i].b = 68;
-                i++; 
-        }else{
-            newposition = position + (imageGlobal->x);
-            i = newposition;
-            position = newposition;
-            if (newposition < 0){
-                count = 1;
+    for (int i = y - 1; i >= 0 ; i--){
+        if (i == imageGlobal->y - 1) {
+            touchedBord = 1;
+        }
+        int pixelPosition = abs((i * imageGlobal->y) - x);
+        if (!(backgroundColor->r == imageGlobal->matrizDePixels[pixelPosition].r && backgroundColor->g == imageGlobal->matrizDePixels[pixelPosition].g && backgroundColor->b == imageGlobal->matrizDePixels[pixelPosition].b)){
+            break;
+        }
+        for (int j = x; j < imageGlobal->x; j++){
+            if (j == imageGlobal->x - 1) {
+                touchedBord = 1;
             }
-            if (backgroundColor->r != imageGlobal->matrizDePixels[i].r || backgroundColor->g != imageGlobal->matrizDePixels[i].g || backgroundColor->b != imageGlobal->matrizDePixels[i].b){
-                count = 1;
+            pixelPosition = abs((i * imageGlobal->y) - j);
+            if (backgroundColor->r == imageGlobal->matrizDePixels[pixelPosition].r && backgroundColor->g == imageGlobal->matrizDePixels[pixelPosition].g && backgroundColor->b == imageGlobal->matrizDePixels[pixelPosition].b){
+                imageGlobal->matrizDePixels[pixelPosition].r = 90;
+                imageGlobal->matrizDePixels[pixelPosition].g = 172;
+                imageGlobal->matrizDePixels[pixelPosition].b = 68;
+            }else{
+                break;
             }
         }
     }
-    count = 0;
-    i = (((y * imageGlobal->y) - x) - 1) + imageGlobal->x;
-    position = i;
-    while (count == 0){
-        if (backgroundColor->r == imageGlobal->matrizDePixels[i].r && backgroundColor->g == imageGlobal->matrizDePixels[i].g && backgroundColor->b == imageGlobal->matrizDePixels[i].b){
-                imageGlobal->matrizDePixels[i].r = 90;
-                imageGlobal->matrizDePixels[i].g = 172;
-                imageGlobal->matrizDePixels[i].b = 68;
-                i--; 
-        }else{
-            newposition = position + (imageGlobal->x);
-            i = newposition;
-            position = newposition;
-            if (newposition < 0){
-                count = 1;
+    for (int i = y - 1; i >= 0 ; i--){
+        if (i == imageGlobal->y - 1) {
+            touchedBord = 1;
+        }
+        int pixelPosition = abs((i * imageGlobal->y) - (x - 1));
+        if (!(backgroundColor->r == imageGlobal->matrizDePixels[pixelPosition].r && backgroundColor->g == imageGlobal->matrizDePixels[pixelPosition].g && backgroundColor->b == imageGlobal->matrizDePixels[pixelPosition].b)){
+            break;
+        }
+        for (int j = x - 1; j >= 0; j--){
+            if (j == imageGlobal->x - 1) {
+                touchedBord = 1;
             }
-            if (backgroundColor->r != imageGlobal->matrizDePixels[i].r || backgroundColor->g != imageGlobal->matrizDePixels[i].g || backgroundColor->b != imageGlobal->matrizDePixels[i].b){
-                count = 1;
+            pixelPosition = abs((i * imageGlobal->y) - j);
+            if (backgroundColor->r == imageGlobal->matrizDePixels[pixelPosition].r && backgroundColor->g == imageGlobal->matrizDePixels[pixelPosition].g && backgroundColor->b == imageGlobal->matrizDePixels[pixelPosition].b){
+                imageGlobal->matrizDePixels[pixelPosition].r = 90;
+                imageGlobal->matrizDePixels[pixelPosition].g = 172;
+                imageGlobal->matrizDePixels[pixelPosition].b = 68;
+            }else{
+                break;
             }
         }
     }
