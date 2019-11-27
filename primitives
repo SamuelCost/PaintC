@@ -1,8 +1,6 @@
 open image.ppm
 image 100 100
-polygon 3 10 10 30 10 15 30
-circle 10 50 5
-circle 50 10 5
-rotate 270
+polygon 3 10 10 10 75 20 70
+fill 15 69
 save ppm2.ppm
 comand
