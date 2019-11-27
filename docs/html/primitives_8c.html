@@ -91,8 +91,7 @@ Functions</h2></td></tr>
 <tr class="separator:ad4cea4a9f1e1efb56038aee7d4d68e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad246187f246d62a20bcee0cfdefc28d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="primitives_8c.html#ad246187f246d62a20bcee0cfdefc28d7">clear</a> (int r, int g, int b)</td></tr>
 <tr class="separator:ad246187f246d62a20bcee0cfdefc28d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a340b12e3c5c65176dfa614dc18faa89e"><td class="memItemLeft" align="right" valign="top"><a id="a340b12e3c5c65176dfa614dc18faa89e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fill</b> (int x, int y)</td></tr>
+<tr class="memitem:a340b12e3c5c65176dfa614dc18faa89e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="primitives_8c.html#a340b12e3c5c65176dfa614dc18faa89e">fill</a> (int x, int y)</td></tr>
 <tr class="separator:a340b12e3c5c65176dfa614dc18faa89e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cb2947c89070dc7fae4d37f99c793ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="primitives_8c.html#a4cb2947c89070dc7fae4d37f99c793ac">image</a> (int x, int y)</td></tr>
 <tr class="separator:a4cb2947c89070dc7fae4d37f99c793ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -331,6 +330,42 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>fill</b> (int x, int 
   </dd>
 </dl>
 <p>Como salvamos e lemos os pixels em um array unidimensional, é necessário encontra o índice equivalente a coordenada x,y a partir da variável pixelPosition </p>
+
+</div>
+</div>
+<a id="a340b12e3c5c65176dfa614dc18faa89e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a340b12e3c5c65176dfa614dc18faa89e">&#9670;&nbsp;</a></span>fill()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fill </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Função que pinta a imagem ou a figura </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>Orientação da coordenada X (largura) </td></tr>
+    <tr><td class="paramname">y</td><td>Orientação da coordenada Y (altura)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>A função verifica pixel por pixel. Caso o pixel esteja na cor definida para o background, ele pintará. Caso a cor seja diferente do color definido, ele não pintará, parará e voltará a posição inicial, percorrendo outro sentido. </p>
 
 </div>
 </div>

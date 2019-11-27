@@ -114,7 +114,7 @@ move bottom 10
 rotate 90
 ```
 
-### Pintar o poligono ou o background - WIP
+### Pintar o poligono ou o background
 ```
 fill 50 50
 ```

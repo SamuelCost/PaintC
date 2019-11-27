@@ -54,6 +54,12 @@ void clear(int r, int g, int b) {
     }
 }
 
+/**
+* Função que pinta a imagem ou a figura
+* @param x Orientação da coordenada X (largura)
+* @param y Orientação da coordenada Y (altura)
+* @details A função verifica pixel por pixel. Caso o pixel esteja na cor definida para o background, ele pintará. Caso a cor seja diferente do color definido, ele não pintará, parará e voltará a posição inicial, percorrendo outro sentido.
+*/
 
 void fill(int x, int y){
     int touchedBord = 0;
@@ -145,9 +151,6 @@ void fill(int x, int y){
             }
         }
     }
-
-/// =====================================================================================================================================
-
     if (touchedBord == 1){
         for (int i = 0; i < imageGlobal->y ; i++){            
             for (int j = 0; j < imageGlobal->x; j++){

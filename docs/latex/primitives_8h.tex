@@ -16,8 +16,7 @@ void \hyperlink{primitives_8h_ad4cea4a9f1e1efb56038aee7d4d68e7c}{color} (int r, 
 \item 
 void \hyperlink{primitives_8h_ad246187f246d62a20bcee0cfdefc28d7}{clear} (int r, int g, int b)
 \item 
-\mbox{\Hypertarget{primitives_8h_a340b12e3c5c65176dfa614dc18faa89e}\label{primitives_8h_a340b12e3c5c65176dfa614dc18faa89e}} 
-void {\bfseries fill} (int x, int y)
+void \hyperlink{primitives_8h_a340b12e3c5c65176dfa614dc18faa89e}{fill} (int x, int y)
 \item 
 void \hyperlink{primitives_8h_a4cb2947c89070dc7fae4d37f99c793ac}{image} (int x, int y)
 \item 
@@ -125,7 +124,20 @@ Função auxiliar que pinta o pixel com base em suas coordenada x, y
 {\em y} & Valor vertical da coordenada\\
 \hline
 \end{DoxyParams}
-Como salvamos e lemos os pixels em um array unidimensional, é necessário encontra o índice equivalente a coordenada x,y a partir da variável pixel\+Position \mbox{\Hypertarget{primitives_8h_a086e643b8063cb3bf3450ef966dcd3eb}\label{primitives_8h_a086e643b8063cb3bf3450ef966dcd3eb}} 
+Como salvamos e lemos os pixels em um array unidimensional, é necessário encontra o índice equivalente a coordenada x,y a partir da variável pixel\+Position \mbox{\Hypertarget{primitives_8h_a340b12e3c5c65176dfa614dc18faa89e}\label{primitives_8h_a340b12e3c5c65176dfa614dc18faa89e}} 
+\index{primitives.\+h@{primitives.\+h}!fill@{fill}}
+\index{fill@{fill}!primitives.\+h@{primitives.\+h}}
+\subsubsection{\texorpdfstring{fill()}{fill()}}
+{\footnotesize\ttfamily void fill (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Função que pinta a imagem ou a figura 
+\begin{DoxyParams}{Parameters}
+{\em x} & Orientação da coordenada X (largura) \\
+\hline
+{\em y} & Orientação da coordenada Y (altura)\\
+\hline
+\end{DoxyParams}
+A função verifica pixel por pixel. Caso o pixel esteja na cor definida para o background, ele pintará. Caso a cor seja diferente do color definido, ele não pintará, parará e voltará a posição inicial, percorrendo outro sentido. \mbox{\Hypertarget{primitives_8h_a086e643b8063cb3bf3450ef966dcd3eb}\label{primitives_8h_a086e643b8063cb3bf3450ef966dcd3eb}} 
 \index{primitives.\+h@{primitives.\+h}!flip@{flip}}
 \index{flip@{flip}!primitives.\+h@{primitives.\+h}}
 \subsubsection{\texorpdfstring{flip()}{flip()}}
